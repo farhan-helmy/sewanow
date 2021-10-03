@@ -72,8 +72,8 @@
 <script>
 export default {
     name: "HalfPageWithIllustration",
+    layout: "auth",
     mounted: function () {
-        
     },
     methods: {
     
