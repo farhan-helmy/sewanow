@@ -1,7 +1,7 @@
 <template>
   <!-- Vertical navigation starts -->
-  <div class="flex flex-no-wrap h-screen">
-    <div class="h-full bg-gray-900 p-4">
+  <div class="relative min-h-screen flex">
+    <div class="bg-gray-900 p-4">
       <div class="flex w-full h-full">
         <div class="h-full flex flex-col h-full justify-between">
           <div class="">
@@ -339,13 +339,13 @@
         </div>
       </div>
     </div>
-    <div class="container mx-auto py-10 h-64 md:w-4/5 w-11/12 px-6">
+    
       <!-- Remove class [ border-dashed border-2 border-gray-300 ] to remove dotted border -->
-      <div class="w-full h-full rounded">
+      <div class="mx-auto py-10 h-64 md:w-4/5 w-11/12 px-6 container w-full h-full rounded">
         <!-- Place your content here -->
         <Nuxt />
       </div>
-    </div>
+    
   </div>
   <!-- Vertical navigation ends -->
 </template>

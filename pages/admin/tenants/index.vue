@@ -305,6 +305,7 @@
                 3
               </td>
               <td class="pr-8 relative">
+                <NuxtLink to="/admin/tenants/1">
                 <button
                   class="
                     focus:ring-2 focus:ring-offset-2 focus:ring-red-300
@@ -321,6 +322,7 @@
                 >
                   View
                 </button>
+                </NuxtLink>
               </td>
             </tr>
           </tbody>

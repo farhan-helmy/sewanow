@@ -5,6 +5,7 @@
       class="
         container
         px-6
+        py-6
         mx-auto
         flex flex-col
         md:flex-row
