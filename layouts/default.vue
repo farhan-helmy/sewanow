@@ -205,11 +205,11 @@
                 class="w-full mt-10"
                 :class="menu === false ? 'hidden' : 'true'"
               >
-                <NuxtLink to="/home">
+                <NuxtLink to="/admin/home">
                   <p
                     class="text-base leading-4 pl-3 cursor-pointer"
                     :class="
-                      this.$route.path === '/home'
+                      this.$route.path === '/admin/home'
                         ? 'text-gray-100'
                         : 'text-gray-400'
                     "
@@ -217,11 +217,11 @@
                     Dashboard
                   </p>
                 </NuxtLink>
-                <NuxtLink to="/tenants">
+                <NuxtLink to="/admin/tenants">
                   <p
                     class="text-base leading-4 pl-3 cursor-pointer pt-7"
                     :class="
-                      this.$route.path === '/tenants'
+                      this.$route.path === '/admin/tenants' 
                         ? 'text-gray-100'
                         : 'text-gray-400'
                     "

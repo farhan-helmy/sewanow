@@ -1,6 +1,6 @@
 <template>
   <!-- Code block starts -->
-  <div>
+  <div class="w-full py-10">
     <div
       class="
         container
@@ -78,7 +78,7 @@
                 </div>
               </div>
             </div>
-             <p
+            <p
               tabindex="0"
               class="focus:outline-none mt-1.5 text-xs leading-3 text-gray-500"
             >
