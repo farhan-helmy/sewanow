@@ -85,27 +85,7 @@
                 placeholder="Search"
               />
             </div>
-            <button
-              onclick="popuphandler(true)"
-              class="
-                focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600
-                inline-flex
-                ml-3
-                whitespace-nowrap
-                items-start
-                justify-start
-                px-6
-                py-3
-                bg-indigo-700
-                hover:bg-indigo-600
-                focus:outline-none
-                rounded
-              "
-            >
-              <p class="text-xs sm:text-sm font-medium leading-none text-white">
-                Add Property
-              </p>
-            </button>
+           
           </div>
         </div>
       </div>

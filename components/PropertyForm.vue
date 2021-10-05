@@ -43,7 +43,7 @@
                       text-gray-800
                       dark:text-gray-100
                     "
-                    >First Name</label
+                    >Building Type</label
                   >
                   <input
                     type="text"
@@ -77,7 +77,7 @@
                       text-gray-800
                       dark:text-gray-100
                     "
-                    >Last Name</label
+                    >Amount</label
                   >
                   <input
                     type="text"
