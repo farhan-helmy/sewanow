@@ -448,27 +448,6 @@
         >
           <button
             class="
-              btn
-              text-sm
-              focus:outline-none
-              text-gray-600
-              dark:text-gray-400
-              border border-gray-300
-              dark:border-gray-500
-              py-2
-              px-6
-              mr-4
-              rounded
-              hover:bg-gray-200
-              transition
-              duration-150
-              ease-in-out
-            "
-          >
-            Restore
-          </button>
-          <button
-            class="
               bg-indigo-700
               transition
               duration-150

@@ -22,9 +22,9 @@
           dark:text-gray-100
         "
       >
-        Tenant #MC001
+        Property TESTID123
       </h4>
-      <NuxtLink to="/admin/tenants">
+      <NuxtLink to="/admin/properties">
         <button
           class="
             focus:outline-none
@@ -110,7 +110,7 @@
                     tracking-normal
                   "
                 >
-                  Farhan
+                  Rumah Teres
                 </h2>
               </div>
             </div>
@@ -127,6 +127,17 @@
               "
             >
               <div class="mr-6 xl:mr-6">
+                  <p
+                  class="
+                    text-gray-800
+                    dark:text-gray-100
+                    text-sm
+                    xl:text-sm
+                    leading-5
+                  "
+                >
+                  Rent Amount
+                </p>
                 <h2
                   class="
                     text-gray-600
@@ -139,19 +150,9 @@
                     text-center
                   "
                 >
-                  3
+                  RM 950
                 </h2>
-                <p
-                  class="
-                    text-gray-800
-                    dark:text-gray-100
-                    text-sm
-                    xl:text-l
-                    leading-5
-                  "
-                >
-                  Property Owned
-                </p>
+                
               </div>
             </div>
             <div
@@ -180,9 +181,9 @@
                 <div
                   class="
                     rounded-full
-                    bg-green-200
-                    text-gray-600
-                    dark:text-gray-400
+                    bg-red-400
+                    text-gray-800
+                    font-bold
                     text-sm
                     px-6
                     py-2
@@ -191,39 +192,8 @@
                     items-center
                   "
                 >
-                  Active
+                  Overdue
                 </div>
-                <NuxtLink to="/admin/property/1/add" >
-                <button
-                  onclick="popuphandler(true)"
-                  class="
-                    focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600
-                    inline-flex
-                    ml-3
-                    whitespace-nowrap
-                    items-start
-                    justify-start
-                    px-6
-                    py-3
-                    bg-indigo-700
-                    hover:bg-indigo-600
-                    focus:outline-none
-                    rounded
-                  "
-                >
-                  <p
-                    class="
-                      text-xs
-                      sm:text-sm
-                      font-medium
-                      leading-none
-                      text-white
-                    "
-                  >
-                    Add Property
-                  </p>
-                </button>
-                </NuxtLink>
               </div>
             </div>
           </div>
@@ -231,8 +201,6 @@
       </div>
       <!-- Card code block end -->
     </div>
-
-    <PropertyTable />
   </div>
 </template>
 

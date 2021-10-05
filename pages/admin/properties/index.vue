@@ -41,7 +41,7 @@
               dark:text-gray-100
             "
           >
-            Tenants
+            Properties
           </h4>
         </div>
         <div
@@ -55,32 +55,7 @@
             justify-end
           "
         >
-          <div class="lg:ml-6 flex items-center">
-            <NuxtLink to="/admin/tenants/add">
-              <button
-                class="
-                  bg-gray-200
-                  transition
-                  duration-150
-                  ease-in-out
-                  focus:outline-none
-                  border border-transparent
-                  focus:border-gray-800
-                  focus:shadow-outline-gray
-                  hover:bg-gray-300
-                  rounded
-                  text-indigo-700
-                  px-5
-                  h-8
-                  flex
-                  items-center
-                  text-sm
-                "
-              >
-                Add New Tenant
-              </button>
-            </NuxtLink>
-          </div>
+          
         </div>
       </div>
       <div class="w-full overflow-x-scroll xl:overflow-x-hidden">
@@ -128,7 +103,7 @@
                   leading-4
                 "
               >
-                Tenant ID
+                Property ID
               </th>
               <th
                 class="
@@ -141,7 +116,7 @@
                   leading-4
                 "
               >
-                Name
+                Owner Name
               </th>
               <th
                 class="
@@ -154,35 +129,8 @@
                   leading-4
                 "
               >
-                Phone No.
+                Rent Due
               </th>
-              <th
-                class="
-                  text-gray-600
-                  dark:text-gray-400
-                  font-normal
-                  pr-6
-                  text-left text-sm
-                  tracking-normal
-                  leading-4
-                "
-              >
-                Email
-              </th>
-              <th
-                class="
-                  text-gray-600
-                  dark:text-gray-400
-                  font-normal
-                  pr-6
-                  text-left text-sm
-                  tracking-normal
-                  leading-4
-                "
-              >
-                Property Owned
-              </th>
-
               <td
                 class="
                   text-gray-600
@@ -240,7 +188,7 @@
                   leading-4
                 "
               >
-                #MC10023
+                TESTID123
               </td>
               <td
                 class="
@@ -261,42 +209,16 @@
                   pr-6
                   font-bold
                   whitespace-no-wrap
-                  text-gray-800
-                  dark:text-gray-100
+                  text-gray-1000
+                  dark:text-gray-500
                   tracking-normal
                   leading-4
                 "
               >
-                014-338 1756
-              </td>
-              <td
-                class="
-                  text-sm
-                  pr-6
-                  whitespace-no-wrap
-                  text-gray-800
-                  dark:text-gray-100
-                  tracking-normal
-                  leading-4
-                "
-              >
-                test@email.com
-              </td>
-              <td
-                class="
-                  text-sm
-                  pr-6
-                  whitespace-no-wrap
-                  text-gray-800
-                  dark:text-gray-100
-                  tracking-normal
-                  leading-4
-                "
-              >
-                3
+                30/1/2021
               </td>
               <td class="pr-8 relative">
-                <NuxtLink to="/admin/tenants/1">
+                <NuxtLink to="/admin/properties/1">
                 <button
                   class="
                     focus:ring-2 focus:ring-offset-2 focus:ring-red-300
