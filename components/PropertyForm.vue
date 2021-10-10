@@ -407,7 +407,7 @@
                       text-gray-800
                       dark:text-gray-100
                     "
-                    >Rent Due</label
+                    >Rent Due Every Month (Day)</label
                   >
                   <input
                     type="text"
@@ -428,7 +428,7 @@
                       text-gray-800
                       dark:text-gray-100
                     "
-                    placeholder="e.g dd/MM"
+                    placeholder="e.g dd"
                   />
                 </div>
               </div>
