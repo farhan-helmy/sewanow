@@ -4,14 +4,14 @@
       <form
         id="form"
         class="container mx-auto bg-white shadow rounded"
-        v-on:submit.prevent
+        @submit.prevent="submitForm"
       >
         <div
           class="xl:w-full border-b border-gray-300 dark:border-gray-700 py-5"
         >
           <div class="flex items-center w-11/12 mx-auto">
             <p class="text-lg text-gray-800 dark:text-gray-100 font-bold">
-              Personal Information
+              Tenant Information
             </p>
             <div class="ml-2 cursor-pointer text-gray-600 dark:text-gray-400">
               <svg
@@ -43,47 +43,14 @@
                       text-gray-800
                       dark:text-gray-100
                     "
-                    >First Name</label
+                    >Full Name</label
                   >
                   <input
                     type="text"
                     name="firstName"
                     required
+                    v-model="formData.name"
                     id="FirstName"
-                    class="
-                      border border-gray-300
-                      dark:border-gray-700
-                      pl-3
-                      py-3
-                      shadow-sm
-                      rounded
-                      text-sm
-                      focus:outline-none
-                      bg-transparent
-                      focus:border-indigo-700
-                      text-gray-800
-                      dark:text-gray-100
-                    "
-                    placeholder=""
-                  />
-                </div>
-                <div class="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
-                  <label
-                    for="LastName"
-                    class="
-                      pb-2
-                      text-sm
-                      font-bold
-                      text-gray-800
-                      dark:text-gray-100
-                    "
-                    >Last Name</label
-                  >
-                  <input
-                    type="text"
-                    id="LastName"
-                    name="lastName"
-                    required
                     class="
                       border border-gray-300
                       dark:border-gray-700
@@ -146,6 +113,7 @@
                     <input
                       id="email2"
                       name="email"
+                      v-model="formData.email"
                       required
                       class="
                         w-full
@@ -202,8 +170,9 @@
                     <select
                       type="text"
                       name="states"
+                      v-model="formData.state"
                       required
-                      id="States"
+                      id="state"
                       class="
                         bg-white
                         dark:bg-gray-800
@@ -221,7 +190,13 @@
                         rounded
                       "
                     >
-                      <option v-for="state in states" :key="state" :value="state">{{state}}</option>
+                      <option
+                        v-for="state in states"
+                        :key="state"
+                        :value="state"
+                      >
+                        {{ state }}
+                      </option>
                     </select>
                     <div
                       class="
@@ -294,6 +269,7 @@
                     type="text"
                     id="StreetAddress"
                     name="streetAddress"
+                    v-model="formData.street_address"
                     required
                     class="
                       border border-gray-300
@@ -326,8 +302,8 @@
                   >
                   <input
                     type="text"
-                    id="City"
-                    name="City"
+                    id="Country"
+                    v-model="formData.country"
                     required
                     class="
                       border border-gray-300
@@ -346,41 +322,44 @@
                     placeholder=""
                   />
                 </div>
+                <div class="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
+                  <label
+                    for="city"
+                    class="
+                      pb-2
+                      text-sm
+                      font-bold
+                      text-gray-800
+                      dark:text-gray-100
+                    "
+                    >City</label
+                  >
+                  <input
+                    type="text"
+                    id="city"
+                    name="city"
+                    v-model="formData.city"
+                    required
+                    class="
+                      border border-gray-300
+                      dark:border-gray-700
+                      pl-3
+                      py-3
+                      shadow-sm
+                      rounded
+                      text-sm
+                      focus:outline-none
+                      bg-transparent
+                      focus:border-indigo-700
+                      text-gray-800
+                      dark:text-gray-100
+                    "
+                    placeholder=""
+                  />
+                </div>
+                
               </div>
-              <div class="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
-                <label
-                  for="city"
-                  class="
-                    pb-2
-                    text-sm
-                    font-bold
-                    text-gray-800
-                    dark:text-gray-100
-                  "
-                  >City</label
-                >
-                <input
-                  type="text"
-                  id="city"
-                  name="city"
-                  required
-                  class="
-                    border border-gray-300
-                    dark:border-gray-700
-                    pl-3
-                    py-3
-                    shadow-sm
-                    rounded
-                    text-sm
-                    focus:outline-none
-                    bg-transparent
-                    focus:border-indigo-700
-                    text-gray-800
-                    dark:text-gray-100
-                  "
-                  placeholder=""
-                />
-              </div>
+
               <div class="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
                 <div class="flex items-center pb-2">
                   <label
@@ -407,9 +386,10 @@
                 </div>
 
                 <input
-                  type="text"
+                  type="number"
                   id="ZIP"
                   name="zip"
+                  v-model.number="formData.zip_code"
                   class="
                     border
                     pl-3
@@ -429,6 +409,41 @@
                   class="flex justify-between items-center pt-1 text-red-400"
                 ></div>
               </div>
+               <div class="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
+                  <label
+                    for="phone_no"
+                    class="
+                      pb-2
+                      text-sm
+                      font-bold
+                      text-gray-800
+                      dark:text-gray-100
+                    "
+                    >Phone Number</label
+                  >
+                  <input
+                    type="text"
+                    id="phone_no"
+                    name="phone_no"
+                    v-model="formData.phone_no"
+                    required
+                    class="
+                      border border-gray-300
+                      dark:border-gray-700
+                      pl-3
+                      py-3
+                      shadow-sm
+                      rounded
+                      text-sm
+                      focus:outline-none
+                      bg-transparent
+                      focus:border-indigo-700
+                      text-gray-800
+                      dark:text-gray-100
+                    "
+                    placeholder=""
+                  />
+                </div>
             </div>
           </div>
         </div>
@@ -478,6 +493,15 @@ export default {
   },
   data: () => ({
     states: [],
+    formData: {
+      name: '',
+      email: '',
+      phone_no: '',
+      zip_code: '',
+      state: '',
+      city: '',
+      street_address: '',
+    },
   }),
   methods: {
     fetchCities() {
@@ -492,15 +516,16 @@ export default {
         'Johor',
         'Kedah',
         'Penang',
-        'Perak',
         'Perlis',
         'Sabah',
         'Sarawak',
         'Labuan',
         'Melaka',
       ]
-
       this.states = states
+    },
+    async submitForm() {
+      console.log(this.formData)
     },
   },
 }

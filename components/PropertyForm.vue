@@ -531,9 +531,9 @@ export default {
         'Labuan',
         'Melaka',
       ]
-
       this.states = states
     },
+    
   },
 }
 </script>

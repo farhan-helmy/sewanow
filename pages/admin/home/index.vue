@@ -69,7 +69,7 @@
                 md:mt-5
               "
             >
-              10
+              {{this.tenantcount}}
             </p>
             <div class="flex flex-col">
               <div class="h-4"></div>
@@ -234,5 +234,15 @@
 <script>
 export default {
   name: 'SimpleWithButtons',
+  data: () => ({
+    tenantcount: '',
+    rentoverdue: '',
+    revenue: '',
+  }),
+  async fetch() {
+    const result = await this.$axios.$get('/v1/user/me')
+    console.log(result.user.tenants.length)
+    this.tenantcount = result.user.tenants.length
+  },
 }
 </script>
