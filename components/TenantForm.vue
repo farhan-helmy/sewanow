@@ -357,7 +357,6 @@
                     placeholder=""
                   />
                 </div>
-                
               </div>
 
               <div class="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
@@ -409,41 +408,41 @@
                   class="flex justify-between items-center pt-1 text-red-400"
                 ></div>
               </div>
-               <div class="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
-                  <label
-                    for="phone_no"
-                    class="
-                      pb-2
-                      text-sm
-                      font-bold
-                      text-gray-800
-                      dark:text-gray-100
-                    "
-                    >Phone Number</label
-                  >
-                  <input
-                    type="text"
-                    id="phone_no"
-                    name="phone_no"
-                    v-model="formData.phone_no"
-                    required
-                    class="
-                      border border-gray-300
-                      dark:border-gray-700
-                      pl-3
-                      py-3
-                      shadow-sm
-                      rounded
-                      text-sm
-                      focus:outline-none
-                      bg-transparent
-                      focus:border-indigo-700
-                      text-gray-800
-                      dark:text-gray-100
-                    "
-                    placeholder=""
-                  />
-                </div>
+              <div class="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
+                <label
+                  for="phone_no"
+                  class="
+                    pb-2
+                    text-sm
+                    font-bold
+                    text-gray-800
+                    dark:text-gray-100
+                  "
+                  >Phone Number</label
+                >
+                <input
+                  type="text"
+                  id="phone_no"
+                  name="phone_no"
+                  v-model="formData.phone_no"
+                  required
+                  class="
+                    border border-gray-300
+                    dark:border-gray-700
+                    pl-3
+                    py-3
+                    shadow-sm
+                    rounded
+                    text-sm
+                    focus:outline-none
+                    bg-transparent
+                    focus:border-indigo-700
+                    text-gray-800
+                    dark:text-gray-100
+                  "
+                  placeholder=""
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -490,9 +489,11 @@ export default {
   name: 'FormCardWithInputs',
   async created() {
     this.fetchCities()
+    this.getUser()
   },
   data: () => ({
     states: [],
+    user: '',
     formData: {
       name: '',
       email: '',
@@ -501,6 +502,7 @@ export default {
       state: '',
       city: '',
       street_address: '',
+      user_id: '',
     },
   }),
   methods: {
@@ -525,7 +527,18 @@ export default {
       this.states = states
     },
     async submitForm() {
-      console.log(this.formData)
+      try {
+        console.log(this.formData)
+        let response = await this.$axios.post('/v1/tenant/register', this.formData)
+
+        console.log(response)
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    getUser() {
+      this.user = this.$store.getters.getUserInfo
+      this.formData.user_id = this.user.id
     },
   },
 }
