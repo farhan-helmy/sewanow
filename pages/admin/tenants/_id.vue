@@ -1,243 +1,249 @@
 <template>
-  <div class="w-full py-10">
-    <div
-      class="
-        container
-        px-6
-        py-6
-        mx-auto
-        flex flex-col
-        md:flex-row
-        items-start
-        md:items-center
-        justify-between
-      "
-    >
-      <h4
-        class="
-          text-2xl
-          font-bold
-          leading-tight
-          text-gray-800
-          dark:text-gray-100
-        "
-      >
-        Tenant #MC001
-      </h4>
-      <NuxtLink to="/admin/tenants">
-        <button
-          class="
-            focus:outline-none
-            bg-red-400
-            transition
-            duration-150
-            ease-in-out
-            hover:bg-red-500
-            rounded
-            text-white
-            px-3
-            py-2
-            text-xs
-          "
-        >
-          Back
-        </button>
-      </NuxtLink>
-    </div>
-    <div class="flex items-center justify-center w-full py-8">
-      <!-- Card code block start -->
-      <div class="bg-white dark:bg-gray-800 shadow rounded">
-        <div class="relative">
-          <img
-            class="h-56 shadow rounded-t w-full object-cover object-center"
-            src="https://tuk-cdn.s3.amazonaws.com/assets/components/grid_cards/gc_29.png"
-            alt=""
-          />
-          <div
-            class="
-              inset-0
-              m-auto
-              w-24
-              h-24
-              absolute
-              bottom-0
-              -mb-12
-              xl:ml-10
-              rounded
-              border-2
-              shadow
-              border-white
-            "
-          ></div>
-        </div>
-        <div class="px-5 xl:px-10 pb-10">
-          <div class="flex justify-center xl:justify-end w-full pt-16 xl:pt-5">
-            <div class="flex items-center"></div>
-          </div>
-          <div
-            class="
-              pt-3
-              xl:pt-5
-              flex flex-col
-              xl:flex-row
-              items-start
-              xl:items-center
-              justify-between
-            "
-          >
-            <div class="xl:pr-16 w-full xl:w-2/3">
-              <div
-                class="
-                  text-center
-                  xl:text-left
-                  mb-3
-                  xl:mb-0
-                  flex flex-col
-                  xl:flex-row
-                  items-center
-                  justify-between
-                  xl:justify-start
-                "
-              >
-                <h2
-                  class="
-                    mb-3
-                    xl:mb-0
-                    xl:mr-4
-                    text-2xl text-gray-800
-                    dark:text-gray-100
-                    font-medium
-                    tracking-normal
-                  "
-                >
-                  Farhan
-                </h2>
-              </div>
-            </div>
-            <div
-              class="
-                xl:px-10
-                xl:border-l xl:border-r
-                w-full
-                py-5
-                flex
-                items-start
-                justify-center
-                xl:w-1/3
-              "
-            >
-              <div class="mr-6 xl:mr-6">
-                <h2
-                  class="
-                    text-gray-600
-                    dark:text-gray-400
-                    font-bold
-                    text-xl
-                    xl:text-2xl
-                    leading-6
-                    mb-2
-                    text-center
-                  "
-                >
-                  3
-                </h2>
-                <p
-                  class="
-                    text-gray-800
-                    dark:text-gray-100
-                    text-sm
-                    xl:text-l
-                    leading-5
-                  "
-                >
-                  Property Owned
-                </p>
-              </div>
-            </div>
-            <div
-              class="
-                w-full
-                xl:w-2/3
-                flex-col
-                md:flex-row
-                justify-center
-                xl:justify-center
-                flex
-                md:pl-6
-              "
-            >
-              <div
-                class="
-                  flex
-                  items-center
-                  justify-center
-                  mt-1
-                  md:mt-0
-                  mb-5
-                  md:mb-0
-                "
-              >
-                <div
-                  class="
-                    rounded-full
-                    bg-green-200
-                    text-gray-600
-                    dark:text-gray-400
-                    text-sm
-                    px-6
-                    py-2
-                    flex
-                    justify-center
-                    items-center
-                  "
-                >
-                  Active
-                </div>
-                <NuxtLink to="/admin/property/1/add" >
-                <button
-                  onclick="popuphandler(true)"
-                  class="
-                    focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600
-                    inline-flex
-                    ml-3
-                    whitespace-nowrap
-                    items-start
-                    justify-start
-                    px-6
-                    py-3
-                    bg-indigo-700
-                    hover:bg-indigo-600
-                    focus:outline-none
-                    rounded
-                  "
-                >
-                  <p
-                    class="
-                      text-xs
-                      sm:text-sm
-                      font-medium
-                      leading-none
-                      text-white
-                    "
-                  >
-                    Add Property
-                  </p>
-                </button>
-                </NuxtLink>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Card code block end -->
-    </div>
+  <div>
+    <v-container>
+      <v-row>
+        <v-col>
+          <v-card class="mx-auto" max-width="1000" tile>
+            <v-img
+              height="200"
+              src="https://www.w3schools.com/howto/img_nature_wide.jpg"
+            ></v-img>
+            <v-card-actions>
+              <v-list-item class="grow">
+                <v-list-item-avatar size="100">
+                  <img
+                    src="https://www.w3schools.com/howto/img_avatar.png"
+                    alt="John"
+                  />
+                </v-list-item-avatar>
 
-    <PropertyTable />
+                <v-list-item-content>
+                  <v-list-item-title>
+                    <h1>{{ user.name }}</h1>
+                  </v-list-item-title>
+                  <v-list-item-title
+                    >{{ user.city }} | {{ user.state }}
+                  </v-list-item-title>
+                  <v-list-item-title>
+                    <v-chip color="green" dark class="my-4">{{
+                      user.status
+                    }}</v-chip>
+                  </v-list-item-title>
+                </v-list-item-content>
+                <v-row align="center" justify="end">
+                  <v-dialog v-model="dialog" persistent max-width="600px">
+                    <template v-slot:activator="{ on, attrs }">                    
+                      <v-btn color="red" dark v-bind="attrs" v-on="on">
+                        Edit
+                      </v-btn>
+                    </template>
+                    <v-card>
+                      <v-card-title>
+                        <span class="text-h5">Edit User</span>
+                      </v-card-title>
+                      <v-card-text>
+                        <v-container>
+                          <v-row>
+                            <v-col cols="12" sm="6" md="6">
+                              <v-text-field
+                                label="Name"
+                                required
+                                v-model="user.name"
+                              ></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6" md="6">
+                              <v-text-field
+                                label="Email"
+                                required
+                                v-model="user.email"
+                              ></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                              <v-text-field
+                                label="Address"
+                                required
+                                v-model="user.street_address"
+                              ></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6">
+                              <v-text-field
+                                label="City"
+                                required
+                                v-model="user.city"
+                              ></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6">
+                              <v-text-field
+                                label="Phone Number"
+                                required
+                                v-model="user.phone_no"
+                              ></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6">
+                              <v-autocomplete
+                                v-model="user.state"
+                                :items="[
+                                  'Selangor',
+                                  'Perak',
+                                  'Kelantan',
+                                  'Kuala Lumpur',
+                                  'Putrajaya',
+                                  'Negeri Sembilan',
+                                  'Terengganu',
+                                  'Johor',
+                                  'Kedah',
+                                  'Penang',
+                                  'Perlis',
+                                  'Sabah',
+                                  'Sarawak',
+                                  'Labuan',
+                                  'Melaka',
+                                ]"
+                                label="State"
+                              ></v-autocomplete>
+                            </v-col>
+                             <v-col cols="12" sm="6">
+                              <v-autocomplete
+                                v-model="user.status"
+                                :items="[
+                                 'active',
+                                 'inactive'
+                                ]"
+                                label="State"
+                              ></v-autocomplete>
+                            </v-col>
+                          </v-row>
+                        </v-container>
+                      </v-card-text>
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                          color="blue darken-1"
+                          text
+                          @click="dialog = false"
+                        >
+                          Close
+                        </v-btn>
+                        <v-btn color="blue darken-1" text @click="updateUser">
+                          Save
+                        </v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-dialog>
+                </v-row>
+              </v-list-item>
+            </v-card-actions>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+    <v-snackbar v-model="snackbar" :timeout="timeout">
+      {{ text }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn color="blue" text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
+    <v-snackbar v-model="snackbarDeactive" :timeout="timeoutDeactive">
+      {{ textDeactive }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="blue"
+          text
+          v-bind="attrs"
+          @click="snackbarDeactive = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  data: () => ({
+    user: [],
+    send: [],
+    dialog: false,
+    snackbar: false,
+    snackbarDeactive: false,
+    text: 'Tenant updated!',
+    textDeactive: 'Tenant deactivated!',
+    timeout: 2000,
+    timeoutDeactive: 2000,
+  }),
+  mounted() {
+    this.getUser()
+  },
+  methods: {
+    async getUser() {
+      const tenant = await this.$axios.get(
+        `/v1/tenant/${this.$route.params.id}`
+      )
+    
+      this.user = tenant.data
+    },
+    async updateUser() {
+      this.send = {
+        name: this.user.name,
+        email: this.user.email,
+        street_address: this.user.street_address,
+        city: this.user.city,
+        phone_no: this.user.phone_no,
+        state: this.user.state,
+      }
+      try {
+        const tenant = await this.$axios.patch(
+          `/v1/tenant/${this.$route.params.id}`,
+          this.send
+        )
+        if (tenant.status === 200) {
+          ;(this.dialog = false), (this.snackbar = true)
+        }
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async deactivate() {
+      this.send = {
+        status: 'inactive',
+      }
+
+      try {
+        const tenant = await this.$axios.patch(
+          `/v1/tenant/${this.$route.params.id}`,
+          this.send
+        )
+        if (tenant.status === 200) {
+          this.snackbarDeactive = true
+        }
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async activate() {
+      this.send = {
+        status: 'active',
+      }
+
+      try {
+        const tenant = await this.$axios.patch(
+          `/v1/tenant/${this.$route.params.id}`,
+          this.send
+        )
+        if (tenant.status === 200) {
+          this.snackbarDeactive = true
+        }
+      } catch (e) {
+        console.log(e)
+      }
+    },
+  },
+}
 </script>
 
 <style>

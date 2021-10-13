@@ -504,6 +504,7 @@ export default {
       street_address: '',
       user_id: '',
     },
+    is_succeed: false
   }),
   methods: {
     fetchCities() {
@@ -531,7 +532,10 @@ export default {
         console.log(this.formData)
         let response = await this.$axios.post('/v1/tenant/register', this.formData)
 
-        console.log(response)
+        console.log(response.status)
+        if(response.status === 201){
+          this.$router.push('/admin/tenants?success=true')
+        }
       } catch (e) {
         console.log(e)
       }
