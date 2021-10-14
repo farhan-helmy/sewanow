@@ -31,9 +31,16 @@
                   </v-list-item-title>
                 </v-list-item-content>
                 <v-row align="center" justify="end">
+                  <PropertyForm />
                   <v-dialog v-model="dialog" persistent max-width="600px">
-                    <template v-slot:activator="{ on, attrs }">                    
-                      <v-btn color="red" dark v-bind="attrs" v-on="on">
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn
+                        color="red"
+                        dark
+                        v-bind="attrs"
+                        v-on="on"
+                        class="mx-2"
+                      >
                         Edit
                       </v-btn>
                     </template>
@@ -102,14 +109,11 @@
                                 label="State"
                               ></v-autocomplete>
                             </v-col>
-                             <v-col cols="12" sm="6">
+                            <v-col cols="12" sm="6">
                               <v-autocomplete
                                 v-model="user.status"
-                                :items="[
-                                 'active',
-                                 'inactive'
-                                ]"
-                                label="State"
+                                :items="['active', 'inactive']"
+                                label="Status"
                               ></v-autocomplete>
                             </v-col>
                           </v-row>
@@ -135,6 +139,19 @@
             </v-card-actions>
           </v-card>
         </v-col>
+      </v-row>
+      <v-row align="center" justify="center">
+        <v-dialog v-model="table" persistent max-width="600px">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn color="indigo" dark v-bind="attrs" v-on="on" class="mx-2">
+              Show Properties
+            </v-btn>
+          </template>
+          <v-btn color="blue darken-1" @click="table = false">
+            Close
+          </v-btn>
+          <tenant-property-table />
+        </v-dialog>
       </v-row>
     </v-container>
     <v-snackbar v-model="snackbar" :timeout="timeout">
@@ -164,10 +181,14 @@
 </template>
 
 <script>
+import TenantPropertyTable from '~/components/TenantPropertyTable.vue'
 export default {
+  components: { TenantPropertyTable },
   data: () => ({
+    table: false,
     user: [],
     send: [],
+    properties: [],
     dialog: false,
     snackbar: false,
     snackbarDeactive: false,
@@ -184,8 +205,9 @@ export default {
       const tenant = await this.$axios.get(
         `/v1/tenant/${this.$route.params.id}`
       )
-    
+
       this.user = tenant.data
+      console.log(tenant.data.properties)
     },
     async updateUser() {
       this.send = {

@@ -1,539 +1,128 @@
 <template>
-<div>
-  <div class="py-10">
-    <div>
-      <form
-        id="form"
-        class="container mx-auto bg-white shadow rounded py-4"
-        v-on:submit.prevent
-      >
-        <div
-          class="xl:w-full border-b border-gray-300 dark:border-gray-700 py-5"
-        >
-          <div class="flex items-center w-11/12 mx-auto">
-            <p class="text-lg text-gray-800 dark:text-gray-100 font-bold">
-              Property Information
-            </p>
-            <div class="ml-2 cursor-pointer text-gray-600 dark:text-gray-400">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                width="16"
-                height="16"
-              >
-                <path
-                  class="heroicon-ui"
-                  d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-9a1 1 0 0 1 1 1v4a1 1 0 0 1-2 0v-4a1 1 0 0 1 1-1zm0-4a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
-                  fill="currentColor"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
-        <div class="w-11/12 mx-auto">
-          <div class="container mx-auto">
-            <div class="my-8 mx-auto xl:w-full xl:mx-0">
-              <div class="xl:flex lg:flex md:flex flex-wrap justify-between">
-                <div class="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
-                  <label
-                    for="FirstName"
-                    class="
-                      pb-2
-                      text-sm
-                      font-bold
-                      text-gray-800
-                      dark:text-gray-100
-                    "
-                    >Building Type</label
-                  >
-                  <input
-                    type="text"
-                    name="firstName"
-                    required
-                    id="FirstName"
-                    class="
-                      border border-gray-300
-                      dark:border-gray-700
-                      pl-3
-                      py-3
-                      shadow-sm
-                      rounded
-                      text-sm
-                      focus:outline-none
-                      bg-transparent
-                      focus:border-indigo-700
-                      text-gray-800
-                      dark:text-gray-100
-                    "
-                    placeholder=""
-                  />
-                </div>
+  <div>
+    <v-dialog v-model="dialog" persistent max-width="600px">
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn color="grey" dark v-bind="attrs" v-on="on"> Add Property </v-btn>
+      </template>
+      <v-card>
+        <v-card-title>
+          <span class="text-h5">Add Property</span>
+        </v-card-title>
+        <v-card-text>
+          <v-container>
+            <v-row>
+              <v-col cols="12" sm="6" md="6">
+                <v-autocomplete
+                  v-model="property.building_type"
+                  :items="['Landed', 'High Rise', 'Land']"
+                  label="Property Type"
+                ></v-autocomplete>
+              </v-col>
 
-                <div class="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
-                  <label
-                    for="city"
-                    class="
-                      pb-2
-                      text-sm
-                      font-bold
-                      text-gray-800
-                      dark:text-gray-100
-                    "
-                    >City</label
-                  >
-                  <input
-                    type="text"
-                    id="city"
-                    name="city"
-                    required
-                    class="
-                      border border-gray-300
-                      dark:border-gray-700
-                      pl-3
-                      py-3
-                      shadow-sm
-                      rounded
-                      text-sm
-                      focus:outline-none
-                      bg-transparent
-                      focus:border-indigo-700
-                      text-gray-800
-                      dark:text-gray-100
-                    "
-                    placeholder=""
-                  />
-                </div>
+              <v-col cols="12">
+                <v-text-field
+                  label="Address"
+                  required
+                  v-model="property.street_address"
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  label="City"
+                  required
+                  v-model="property.city"
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  label="Postcode / ZIP"
+                  required
+                  v-model.number="property.zip_code"
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-autocomplete
+                  v-model="property.state"
+                  :items="[
+                    'Selangor',
+                    'Perak',
+                    'Kelantan',
+                    'Kuala Lumpur',
+                    'Putrajaya',
+                    'Negeri Sembilan',
+                    'Terengganu',
+                    'Johor',
+                    'Kedah',
+                    'Penang',
+                    'Perlis',
+                    'Sabah',
+                    'Sarawak',
+                    'Labuan',
+                    'Melaka',
+                  ]"
+                  label="State"
+                ></v-autocomplete>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  label="Rent due"
+                  required
+                  v-model.number="property.rent_due"
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  label="Rent Amount"
+                  required
+                  v-model.number="property.rent_amount"
+                ></v-text-field>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" text @click="dialog = false">
+            Close
+          </v-btn>
+          <v-btn color="blue darken-1" text @click="addProperty"> Save </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+     <v-snackbar v-model="snackbar" :timeout="timeout">
+      {{ text }}
 
-                <div class="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
-                  <label
-                    for="States"
-                    class="
-                      pb-2
-                      text-sm
-                      font-bold
-                      text-gray-800
-                      dark:text-gray-100
-                    "
-                    >States</label
-                  >
-                  <div
-                    class="
-                      border border-gray-300
-                      dark:border-gray-700
-                      shadow-sm
-                      rounded
-                      flex
-                      relative
-                    "
-                  >
-                    <select
-                      type="text"
-                      name="states"
-                      required
-                      id="States"
-                      class="
-                        bg-white
-                        dark:bg-gray-800
-                        appearance-none
-                        z-10
-                        pl-3
-                        py-3
-                        w-full
-                        text-sm
-                        border border-transparent
-                        focus:outline-none
-                        focus:border-indigo-700
-                        text-gray-800
-                        dark:text-gray-100
-                        rounded
-                      "
-                    >
-                      <option
-                        v-for="state in states"
-                        :key="state"
-                        :value="state"
-                      >
-                        {{ state }}
-                      </option>
-                    </select>
-                    <div
-                      class="
-                        px-4
-                        flex
-                        items-center
-                        border-l border-gray-300
-                        dark:border-gray-700
-                        flex-col
-                        justify-center
-                        text-gray-500
-                        dark:text-gray-400
-                        absolute
-                        right-0
-                        bottom-0
-                        top-0
-                        mx-auto
-                        z-20
-                        pointer-events-none
-                      "
-                    >
-                      <svg
-                        tabindex="0"
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="icon icon-tabler icon-tabler-chevron-up"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                        fill="none"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" />
-                        <polyline points="6 15 12 9 18 15" />
-                      </svg>
-                      <svg
-                        tabindex="0"
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="icon icon-tabler icon-tabler-chevron-down"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                        fill="none"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" />
-                        <polyline points="6 9 12 15 18 9" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
-                  <label
-                    for="StreetAddress"
-                    class="
-                      pb-2
-                      text-sm
-                      font-bold
-                      text-gray-800
-                      dark:text-gray-100
-                    "
-                    >Street Address</label
-                  >
-                  <input
-                    type="text"
-                    id="StreetAddress"
-                    name="streetAddress"
-                    required
-                    class="
-                      border border-gray-300
-                      dark:border-gray-700
-                      pl-3
-                      py-3
-                      shadow-sm
-                      rounded
-                      text-sm
-                      focus:outline-none
-                      bg-transparent
-                      focus:border-indigo-700
-                      text-gray-800
-                      dark:text-gray-100
-                    "
-                    placeholder=""
-                  />
-                </div>
-              </div>
-              <div class="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
-                <div class="flex items-center pb-2">
-                  <label
-                    for="ZIP"
-                    class="text-sm font-bold text-gray-800 dark:text-gray-100"
-                    >ZIP/Postal Code</label
-                  >
-                  <div
-                    class="ml-2 cursor-pointer text-gray-600 dark:text-gray-400"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      width="16"
-                      height="16"
-                    >
-                      <path
-                        class="heroicon-ui"
-                        d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-9a1 1 0 0 1 1 1v4a1 1 0 0 1-2 0v-4a1 1 0 0 1 1-1zm0-4a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                  </div>
-                </div>
-
-                <input
-                  type="text"
-                  id="ZIP"
-                  name="zip"
-                  class="
-                    border
-                    pl-3
-                    py-3
-                    shadow-sm
-                    rounded
-                    text-sm
-                    focus:outline-none
-                    bg-transparent
-                    focus:border-indigo-700
-                    text-gray-800
-                    dark:text-gray-100
-                  "
-                  placeholder="e.g 86745"
-                />
-                <div
-                  class="flex justify-between items-center pt-1 text-red-400"
-                ></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </form>
-      <!-- <div class="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
-        <label
-          for="LastName"
-          class="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100"
-          >Rent Price</label
-        >
-        <input
-          type="text"
-          id="LastName"
-          name="lastName"
-          required
-          class="
-            border border-gray-300
-            dark:border-gray-700
-            pl-3
-            py-3
-            shadow-sm
-            rounded
-            text-sm
-            focus:outline-none
-            bg-transparent
-            focus:border-indigo-700
-            text-gray-800
-            dark:text-gray-100
-          "
-          placeholder=""
-        />
-      </div> -->
-    </div>
+      <template v-slot:action="{ attrs }">
+        <v-btn color="blue" text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </div>
-  <div class="py-10">
-    <div>
-      <form
-        id="form"
-        class="container mx-auto bg-white shadow rounded"
-        v-on:submit.prevent
-      >
-        <div
-          class="xl:w-full border-b border-gray-300 dark:border-gray-700 py-5"
-        >
-          <div class="flex items-center w-11/12 mx-auto">
-            <p class="text-lg text-gray-800 dark:text-gray-100 font-bold">
-              Payment Information
-            </p>
-            <div class="ml-2 cursor-pointer text-gray-600 dark:text-gray-400">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                width="16"
-                height="16"
-              >
-                <path
-                  class="heroicon-ui"
-                  d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-9a1 1 0 0 1 1 1v4a1 1 0 0 1-2 0v-4a1 1 0 0 1 1-1zm0-4a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
-                  fill="currentColor"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
-        <div class="w-11/12 mx-auto">
-          <div class="container mx-auto">
-            <div class="my-8 mx-auto xl:w-full xl:mx-0">
-              <div class="xl:flex lg:flex md:flex flex-wrap justify-between">
-                <div class="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
-                  <label
-                    for="FirstName"
-                    class="
-                      pb-2
-                      text-sm
-                      font-bold
-                      text-gray-800
-                      dark:text-gray-100
-                    "
-                    >Rent Amount (RM)</label
-                  >
-                  <input
-                    type="text"
-                    name="firstName"
-                    required
-                    id="FirstName"
-                    class="
-                      border border-gray-300
-                      dark:border-gray-700
-                      pl-3
-                      py-3
-                      shadow-sm
-                      rounded
-                      text-sm
-                      focus:outline-none
-                      bg-transparent
-                      focus:border-indigo-700
-                      text-gray-800
-                      dark:text-gray-100
-                    "
-                    placeholder=""
-                  />
-                </div>
-                <div class="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
-                  <label
-                    for="city"
-                    class="
-                      pb-2
-                      text-sm
-                      font-bold
-                      text-gray-800
-                      dark:text-gray-100
-                    "
-                    >Rent Due Every Month (Day)</label
-                  >
-                  <input
-                    type="text"
-                    id="city"
-                    name="city"
-                    required
-                    class="
-                      border border-gray-300
-                      dark:border-gray-700
-                      pl-3
-                      py-3
-                      shadow-sm
-                      rounded
-                      text-sm
-                      focus:outline-none
-                      bg-transparent
-                      focus:border-indigo-700
-                      text-gray-800
-                      dark:text-gray-100
-                    "
-                    placeholder="e.g dd"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="
-            w-full
-            py-4
-            sm:px-12
-            px-4
-            bg-gray-100
-            dark:bg-gray-700
-            mt-6
-            flex
-            justify-end
-            rounded-bl rounded-br
-          "
-        >
-          <button
-            class="
-              bg-indigo-700
-              transition
-              duration-150
-              ease-in-out
-              hover:bg-indigo-600
-              rounded
-              text-white
-              px-8
-              py-2
-              text-sm
-              focus:outline-none
-            "
-            type="submit"
-          >
-            Submit
-          </button>
-        </div>
-      </form>
-      <!-- <div class="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
-        <label
-          for="LastName"
-          class="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100"
-          >Rent Price</label
-        >
-        <input
-          type="text"
-          id="LastName"
-          name="lastName"
-          required
-          class="
-            border border-gray-300
-            dark:border-gray-700
-            pl-3
-            py-3
-            shadow-sm
-            rounded
-            text-sm
-            focus:outline-none
-            bg-transparent
-            focus:border-indigo-700
-            text-gray-800
-            dark:text-gray-100
-          "
-          placeholder=""
-        />
-      </div> -->
-    </div>
-  </div>
-</div>
 </template>
 
 <script>
 export default {
   name: 'FormCardWithInputs',
-  async created() {
-    this.fetchCities()
-  },
   data: () => ({
-    states: [],
+    dialog: false,
+    property: {},
+    snackbar: false,
+    text: 'Property added!',
+    timeout: 2000,
   }),
   methods: {
-    fetchCities() {
-      const states = [
-        'Selangor',
-        'Perak',
-        'Kelantan',
-        'Kuala Lumpur',
-        'Putrajaya',
-        'Negeri Sembilan',
-        'Terengganu',
-        'Johor',
-        'Kedah',
-        'Penang',
-        'Perak',
-        'Perlis',
-        'Sabah',
-        'Sarawak',
-        'Labuan',
-        'Melaka',
-      ]
-      this.states = states
+    async addProperty() {
+      this.property.tenant_id = this.$route.params.id
+
+      console.log(this.property)
+      let response = await this.$axios.post('/v1/property/add', this.property)
+      console.log(response)
+      if (response.status === 201) {
+        this.dialog = false
+        this.snackbar = true
+      }
     },
-    
   },
 }
 </script>

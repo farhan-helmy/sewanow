@@ -249,6 +249,7 @@ export default {
         if (response.status === 201) {
           this.dialog = false
           this.snackbar = true
+          this.$nuxt.refresh()
         }
       } catch (e) {
         console.log(e)
