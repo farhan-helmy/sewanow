@@ -67,6 +67,7 @@ export default {
         //      },
         endpoints: {
           login: { url: '/v1/login', method: 'post' },
+          tenantLogin: {url: '/v1/tenant/login', method: 'post'},
           //        refresh: { url: "/api/auth/refresh-token", method: "post" },
           logout: false, //  we don't have an endpoint for our logout in our API and we just remove the token from localstorage
           user: { url: '/v1/user/me', method: 'get' },

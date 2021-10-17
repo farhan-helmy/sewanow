@@ -20,7 +20,7 @@
             </v-list-item-icon>
 
             <v-list-item-content>
-              <v-list-item-title>Tenant</v-list-item-title>
+              <v-list-item-title>Tenants</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </nuxt-link>

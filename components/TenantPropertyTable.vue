@@ -89,7 +89,7 @@ export default {
   methods: {
     async initialize() {
       let results = await this.$axios.get( `/v1/tenant/${this.$route.params.id}`)
-      console.log(results.data.properties)
+      //console.log(results.data.properties)
       this.properties = results.data.properties
     },
     viewItem(item) {
