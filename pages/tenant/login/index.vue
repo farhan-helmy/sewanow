@@ -7,8 +7,8 @@
       ></v-avatar>
 
       <v-tabs centered class="ml-n9" color="black darken-1">
-        <v-tab><NuxtLink to="/"> Admin </NuxtLink> </v-tab>
-        <v-tab> <NuxtLink to="/tenant/login"> Tenant </NuxtLink> </v-tab>
+        <v-tab> <NuxtLink to="/"> Admin </NuxtLink> </v-tab>
+        <v-tab> <NuxtLink to="/tenant/login" > Tenant </NuxtLink> </v-tab>
       </v-tabs>
 
       <v-avatar
@@ -35,7 +35,7 @@
               style="padding: 20px; border: 1px; border-radius: 50px"
             >
               <v-card-text>
-                <h2 class="font-weight-bold">Admin Login</h2>
+                <h2 class="font-weight-bold">Tenant Login</h2>
                 <hr />
                 <br />
                 <v-form>
@@ -46,6 +46,7 @@
                     prepend-icon="mdi-human"
                     type="text"
                     color="white"
+                    
                   >
                   </v-text-field>
                   <v-text-field
@@ -80,24 +81,9 @@ export default {
   layout: 'auth',
   data: () => ({
     links: [''],
-    loginData: {
-      email: '',
-      password: '',
-    },
+    password: "",
+    username: ""
   }),
-  methods: {
-    async login() {
-      try {
-        let response = await this.$auth.loginWith('local', {
-          data: this.loginData,
-        })
-        this.$router.push('/admin/home')
-        console.log(response)
-      } catch (err) {
-        console.log(err)
-      }
-    },
-  },
 }
 </script>
 
