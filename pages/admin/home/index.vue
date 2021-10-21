@@ -13,7 +13,7 @@
             >
               <v-scroll-y-transition>
                 <div class="text-h2 flex-grow-1 text-center">
-                  {{this.tenantcount}}
+                  {{ this.tenantcount }}
                   <p class="text-h5">Tenants</p>
                 </div>
               </v-scroll-y-transition>
@@ -30,7 +30,7 @@
             >
               <v-scroll-y-transition>
                 <div class="text-h2 flex-grow-1 text-center">
-                 0
+                  0
                   <p class="text-h5">Rent Overdue</p>
                 </div>
               </v-scroll-y-transition>

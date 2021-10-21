@@ -1,78 +1,65 @@
 <template>
-  <v-app id="inspire">
-    <v-app-bar app color="indigo" flat>
-      <v-avatar
-        :color="$vuetify.breakpoint.smAndDown ? 'grey darken-1' : 'transparent'"
-        size="32"
-      ></v-avatar>
+  <div>
+    <v-app>
+      <v-app-bar app color="red" dark>
+        <div class="d-flex align-center">
+          <h1>SewaNow</h1>
+        </div>
 
-      <v-tabs centered class="ml-n9" color="black darken-1">
-        <v-tab><NuxtLink to="/"> Admin </NuxtLink> </v-tab>
-        <v-tab> <NuxtLink to="/tenant/login"> Tenant </NuxtLink> </v-tab>
-      </v-tabs>
+        <v-spacer></v-spacer>
 
-      <v-avatar
-        class="hidden-sm-and-down"
-        color="grey darken-1 shrink"
-        size="32"
-      ></v-avatar>
-    </v-app-bar>
+        <v-btn href="http://localhost:3000/tenant/login" target="_blank" text>
+          <span class="mr-2">TENANT</span>
+          <v-icon>mdi-home</v-icon>
+        </v-btn>
+      </v-app-bar>
 
-    <v-main class="grey lighten-3">
-      <v-container>
-        <v-row>
-          <v-col cols="12" sm="2">
-            <v-sheet rounded="lg" min-height="268">
-              <!--  -->
-            </v-sheet>
-          </v-col>
-
-          <v-col cols="12" sm="8">
-            <v-card
-              dark
-              color="dark"
-              elevation-24
-              style="padding: 20px; border: 1px; border-radius: 50px"
+      <v-main>
+        <v-img class="my-3" contain height="200"></v-img>
+        <v-card
+          class="mx-auto"
+          color="#A9A9A9"
+          dark
+          max-width="400"
+          elevation="7"
+        >
+          <v-card-title>
+            <v-icon color="black">mdi-account</v-icon>
+            <span class="title font-weight-bold text--primary"
+              >Admin Login Here</span
             >
-              <v-card-text>
-                <h2 class="font-weight-bold">Admin Login</h2>
-                <hr />
-                <br />
-                <v-form>
-                  <v-text-field
-                    clearable
-                    v-model="username"
-                    label="Username"
-                    prepend-icon="mdi-human"
-                    type="text"
-                    color="white"
-                  >
-                  </v-text-field>
-                  <v-text-field
-                    clearable
-                    v-model="password"
-                    label="Password"
-                    prepend-icon="mdi-lock"
-                    type="password"
-                    color="white"
-                  >
-                  </v-text-field>
-                </v-form>
-                <br />
-                <v-btn color="grey darken-2" large>Login</v-btn>
-              </v-card-text>
-            </v-card>
-          </v-col>
+          </v-card-title>
 
-          <v-col cols="12" sm="2">
-            <v-sheet rounded="lg" min-height="268">
-              <!--  -->
-            </v-sheet>
-          </v-col>
+          <v-card-text>
+            <form @submit.prevent="login">
+              <v-text-field
+                v-model="loginData.email"
+                label="Username"
+                prepend-icon="mdi-account-circle"
+                hint="Masukkan username anda"
+              />
+              <v-text-field
+                v-model="loginData.password"
+                label="Password"
+                type="password"
+                prepend-icon="mdi-lock"
+              />
+              <v-row justify="center">
+                <v-btn type="submit">Login</v-btn>
+              </v-row>
+            </form>
+          </v-card-text>
+          <v-divider></v-divider>
+        </v-card>
+        <v-row align="center" justify="center">
+          <!--<v-img
+        contain
+        lazy-src="../assets/logo.png"
+      ></v-img> -->
         </v-row>
-      </v-container>
-    </v-main>
-  </v-app>
+      </v-main>
+    </v-app>
+  </div>
 </template>
 
 <script>
@@ -91,7 +78,11 @@ export default {
         let response = await this.$auth.loginWith('local', {
           data: this.loginData,
         })
-        this.$router.push('/admin/home')
+
+        if (response.status === 201) {
+          this.$router.push('/admin/home')
+        }
+
         console.log(response)
       } catch (err) {
         console.log(err)

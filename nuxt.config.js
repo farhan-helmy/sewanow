@@ -81,7 +81,7 @@ export default {
           type: 'Bearer',
         },
         user: {
-          property: 'user',
+          property: 'tenant',
           autoFetch: true,
         },
         //      refreshToken: {  // it sends request automatically when the access token expires, and its expire time has set on the Back-end and does not need to we set it here, because is useless
@@ -92,7 +92,7 @@ export default {
           login: {url: '/v1/tenant/login', method: 'post'},
           //        refresh: { url: "/api/auth/refresh-token", method: "post" },
           logout: false, //  we don't have an endpoint for our logout in our API and we just remove the token from localstorage
-          user: { url: '/v1/user/me', method: 'get' },
+          user: { url: '/v1/tenant/me', method: 'get' },
         },
       },
     },
