@@ -9,7 +9,7 @@
     >
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title> Property Table </v-toolbar-title>
+          <v-toolbar-title> Property Lists </v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
           <v-text-field
@@ -23,9 +23,9 @@
           <v-spacer></v-spacer>
         </v-toolbar>
       </template>
-      <template v-slot:item.status="{ item }">
-        <v-chip :color="getColor(item.status)" dark>
-          {{ item.status }}
+      <template v-slot:item.is_due="{ item }">
+        <v-chip :color="getColor(item.is_due)" dark>
+          {{ item.is_due }}
         </v-chip>
       </template>
       <template v-slot:item.actions="{ item }">
@@ -94,9 +94,13 @@ export default {
 
   methods: {
     async initialize() {
-      let results = await this.$axios.get('/v1/tenant/me')
-      //console.log(results.data.tenant)
-      this.tenants = results.data.tenant.properties
+      try {
+        let results = await this.$axios.get('/v1/tenant/me')
+        //console.log(results.data.tenant)
+        this.tenants = results.data.tenant.properties
+      } catch (e) {
+        console.log(e)
+      }
     },
     viewItem(item) {
       this.$router.push(`/tenant/properties/${item.id}`)
@@ -110,7 +114,8 @@ export default {
       })
     },
     getColor(status) {
-      if (status === 'active') return 'green'
+      console.log("test"+status)
+      if (status === false) return 'green'
     },
   },
 }
