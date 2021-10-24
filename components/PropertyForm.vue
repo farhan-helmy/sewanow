@@ -7,6 +7,41 @@
       <v-card>
         <v-card-title>
           <span class="text-h5">Add Property</span>
+          <v-row align="center" justify="end">
+            <v-btn color="primary" @click="dialogExisting = true"
+              >Add Existing Property</v-btn
+            >
+            <v-dialog
+              v-model="dialogExisting"
+              transition="dialog-bottom-transition"
+              max-width="600"
+            >
+              <v-card>
+                <v-toolbar color="primary" dark
+                  >Choose Existing Property</v-toolbar
+                >
+                <v-card-text>
+                  <v-autocomplete
+                    v-model="select"
+                    :loading="loading"
+                    :items="items"
+                    :search-input.sync="search"
+                    cache-items
+                    class="mx-4 my-4"
+                    flat
+                    hide-no-data
+                    hide-details
+                    label="Search here"
+                    solo-inverted
+                  ></v-autocomplete>
+                </v-card-text>
+                <v-card-actions class="justify-end">
+                  <v-btn text @click="submitProperty">Submit</v-btn>
+                  <v-btn text @click="dialogExisting = false">Close</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-row>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -89,7 +124,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-     <v-snackbar v-model="snackbar" :timeout="timeout">
+    <v-snackbar v-model="snackbar" :timeout="timeout">
       {{ text }}
 
       <template v-slot:action="{ attrs }">
@@ -110,18 +145,65 @@ export default {
     snackbar: false,
     text: 'Property added!',
     timeout: 2000,
+    dialogExisting: false,
+    loading: false,
+    items: [],
+    search: null,
+    select: null,
+    properties: [],
+    assignproperty: {},
   }),
+  watch: {
+    search(val) {
+      val && val !== this.select && this.querySelections(val)
+    },
+  },
+  async fetch() {
+    const results = await this.$axios.$get('/v1/property/all')
+    console.log(results)
+    results.forEach((result) => {
+      this.properties.push(result.full_address)
+    })
+    //console.log(this.properties)
+  },
   methods: {
     async addProperty() {
       this.property.tenant_id = this.$route.params.id
 
       console.log(this.property)
-      let response = await this.$axios.post('/v1/property/add', this.property)
+      let response = await this.$axios.post(
+        '/v1/property/adduser',
+        this.property
+      )
       console.log(response)
       if (response.status === 201) {
         this.dialog = false
         this.snackbar = true
       }
+    },
+    async submitProperty() {
+      // console.log(this.select)
+      // let response = await this.$axios.post()
+      this.assignproperty.tenant_id = this.$route.params.id
+      this.assignproperty.full_address = this.select
+      let response = await this.$axios.post(
+        '/v1/property/addexistinguser',
+        this.assignproperty
+      )
+      if (response.status === 201) {
+        this.dialog = false
+        this.snackbar = true
+      }
+    },
+    querySelections(v) {
+      this.loading = true
+      // Simulated ajax query
+      setTimeout(() => {
+        this.items = this.properties.filter((e) => {
+          return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
+        })
+        this.loading = false
+      }, 500)
     },
   },
 }

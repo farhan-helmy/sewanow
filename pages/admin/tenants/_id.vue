@@ -141,7 +141,7 @@
         </v-col>
       </v-row>
       <v-row align="center" justify="center">
-        <v-dialog v-model="table" persistent max-width="600px">
+        <v-dialog v-model="table" persistent max-width="1000px">
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="indigo" dark v-bind="attrs" v-on="on" class="mx-2">
               Show Properties
@@ -217,6 +217,7 @@ export default {
         city: this.user.city,
         phone_no: this.user.phone_no,
         state: this.user.state,
+        status: this.user.status
       }
       try {
         const tenant = await this.$axios.patch(

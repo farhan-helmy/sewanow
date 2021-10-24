@@ -23,9 +23,12 @@
           <v-spacer></v-spacer>
         </v-toolbar>
       </template>
-      <template v-slot:item.status="{ item }">
-        <v-chip :color="getColor(item.status)" dark>
-          {{ item.status }}
+       <template v-slot:item.is_due="{ item }">
+        <v-chip color="green" dark v-if="!item.is_due">
+          Not Due
+        </v-chip>
+         <v-chip color="red" dark v-if="item.is_due">
+          Due
         </v-chip>
       </template>
       <template v-slot:item.actions="{ item }">
@@ -48,6 +51,24 @@ export default {
         align: 'start',
         sortable: false,
         value: 'building_type',
+      },
+       {
+        text: 'House Number',
+        align: 'start',
+        sortable: false,
+        value: 'house_number',
+      },
+      {
+        text: 'Area',
+        align: 'start',
+        sortable: false,
+        value: 'area',
+      },
+      {
+        text: 'Address',
+        align: 'start',
+        sortable: false,
+        value: 'street_address',
       },
       {
         text: 'Status',

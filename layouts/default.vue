@@ -39,7 +39,7 @@
 
       <template v-slot:append>
         <div class="pa-2">
-          <v-btn block color="red"> Logout </v-btn>
+          <v-btn block color="red" @click="logout"> Logout </v-btn>
         </div>
       </template>
     </v-navigation-drawer>

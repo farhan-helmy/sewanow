@@ -23,9 +23,15 @@
           <v-spacer></v-spacer>
         </v-toolbar>
       </template>
+      <template v-slot:item.rent_amount="{ item }">
+        <span class="font-weight-bold"> RM {{ item.rent_amount }}</span> 
+      </template>
       <template v-slot:item.is_due="{ item }">
-        <v-chip :color="getColor(item.is_due)" dark>
-          {{ item.is_due }}
+        <v-chip color="green" dark v-if="!item.is_due">
+          Not Due
+        </v-chip>
+         <v-chip color="red" dark v-if="item.is_due">
+          Due
         </v-chip>
       </template>
       <template v-slot:item.actions="{ item }">
@@ -99,7 +105,7 @@ export default {
         //console.log(results.data.tenant)
         this.tenants = results.data.tenant.properties
       } catch (e) {
-        console.log(e)
+        //console.log(e)
       }
     },
     viewItem(item) {
@@ -114,7 +120,7 @@ export default {
       })
     },
     getColor(status) {
-      console.log("test"+status)
+      console.log('test' + status)
       if (status === false) return 'green'
     },
   },

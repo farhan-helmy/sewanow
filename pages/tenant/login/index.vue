@@ -16,6 +16,14 @@
 
       <v-main>
         <v-img class="my-3" contain height="200"></v-img>
+        <v-alert
+          v-if="this.error"
+          dismissible
+          border="right"
+          color="red"
+          type="success"
+          >Wrong username / password!</v-alert
+        >
         <v-card
           class="mx-auto"
           color="#A9A9A9"
@@ -71,6 +79,7 @@ export default {
       email: '',
       password: '',
     },
+    error: false,
   }),
   methods: {
     async login() {
@@ -78,13 +87,13 @@ export default {
         let response = await this.$auth.loginWith('local2', {
           data: this.loginData,
         })
-        if (response.status === 201) {
-          this.$router.push('/tenant/home')
-        }
+
+        this.$router.push('/tenant/home')
 
         console.log(response)
       } catch (err) {
-        console.log(err)
+        //console.log(err)
+        this.error = true
       }
     },
   },
