@@ -21,6 +21,7 @@
           ></v-text-field>
 
           <v-spacer></v-spacer>
+          
         </v-toolbar>
       </template>
       <template v-slot:item.rent_amount="{ item }">

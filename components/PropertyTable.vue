@@ -21,15 +21,101 @@
           ></v-text-field>
 
           <v-spacer></v-spacer>
+          <v-btn color="primary" dark @click="propertyForm = true">
+            Add Property
+          </v-btn>
         </v-toolbar>
+        <v-dialog v-model="propertyForm">
+          <v-card>
+            <v-card-title>
+              <span class="text-h5">Add Property</span>
+            </v-card-title>
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-autocomplete
+                      v-model="property.building_type"
+                      :items="['Landed', 'High Rise', 'Land']"
+                      label="Property Type"
+                    ></v-autocomplete>
+                  </v-col>
+
+                  <v-col cols="12">
+                    <v-text-field
+                      label="Address"
+                      required
+                      v-model="property.street_address"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <v-text-field
+                      label="City"
+                      required
+                      v-model="property.city"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-text-field
+                      v-model.number="property.house_number"
+                      label="House Number"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <v-autocomplete
+                      v-model="property.state"
+                      :items="[
+                        'Selangor',
+                        'Perak',
+                        'Kelantan',
+                        'Kuala Lumpur',
+                        'Putrajaya',
+                        'Negeri Sembilan',
+                        'Terengganu',
+                        'Johor',
+                        'Kedah',
+                        'Penang',
+                        'Perlis',
+                        'Sabah',
+                        'Sarawak',
+                        'Labuan',
+                        'Melaka',
+                      ]"
+                      label="State"
+                    ></v-autocomplete>
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <v-text-field
+                      label="Rent due"
+                      required
+                      v-model.number="property.rent_due"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <v-text-field
+                      label="Rent Amount"
+                      required
+                      v-model.number="property.rent_amount"
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="propertyForm = false">
+                Close
+              </v-btn>
+              <v-btn color="blue darken-1" text @click="addProperty">
+                Save
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </template>
-       <template v-slot:item.is_due="{ item }">
-        <v-chip color="green" dark v-if="!item.is_due">
-          Not Due
-        </v-chip>
-         <v-chip color="red" dark v-if="item.is_due">
-          Due
-        </v-chip>
+      <template v-slot:item.is_due="{ item }">
+        <v-chip color="green" dark v-if="!item.is_due"> Not Due </v-chip>
+        <v-chip color="red" dark v-if="item.is_due"> Due </v-chip>
       </template>
       <template v-slot:item.actions="{ item }">
         <v-icon medium @click="viewItem(item)"> mdi-eye </v-icon>
@@ -44,6 +130,7 @@
 <script>
 export default {
   data: () => ({
+    propertyForm: false,
     search: '',
     headers: [
       {
@@ -52,7 +139,7 @@ export default {
         sortable: false,
         value: 'building_type',
       },
-       {
+      {
         text: 'House Number',
         align: 'start',
         sortable: false,
@@ -92,6 +179,7 @@ export default {
     ],
     tenants: [],
     states: [],
+    property: [],
     formData: {
       name: '',
       email: '',
@@ -148,6 +236,15 @@ export default {
       let results = await this.$axios.get('/v1/property/all')
       console.log(results.data)
       this.tenants = results.data
+    },
+    async addProperty() {
+      console.log(this.property)
+      let response = await this.$axios.post('/v1/property/add', this.property)
+      console.log(response)
+      if (response.status === 201) {
+        this.dialog = false
+        this.snackbar = true
+      }
     },
     viewItem(item) {
       this.$router.push(`/admin/properties/${item.id}`)

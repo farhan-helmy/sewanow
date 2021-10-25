@@ -68,11 +68,10 @@
                   v-model="property.city"
                 ></v-text-field>
               </v-col>
-              <v-col cols="12" sm="6">
+              <v-col cols="12" sm="6" md="4">
                 <v-text-field
-                  label="Postcode / ZIP"
-                  required
-                  v-model.number="property.zip_code"
+                  v-model.number="property.house_number"
+                  label="House Number"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" sm="6">
