@@ -124,12 +124,24 @@
         <v-btn color="primary" @click="initialize"> Reset </v-btn>
       </template>
     </v-data-table>
+    <v-snackbar v-model="snackbar" :timeout="timeout">
+      {{ text }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn color="blue" text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
 <script>
 export default {
   data: () => ({
+    snackbar: false,
+    text: 'Property created!',
+    timeout: 2000,
     propertyForm: false,
     search: '',
     headers: [
@@ -242,7 +254,7 @@ export default {
       let response = await this.$axios.post('/v1/property/add', this.property)
       console.log(response)
       if (response.status === 201) {
-        this.dialog = false
+        this.propertyForm = false
         this.snackbar = true
       }
     },
