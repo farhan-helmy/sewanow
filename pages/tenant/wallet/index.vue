@@ -27,13 +27,13 @@
           </v-col>
         </div>
       </v-expand-transition>
-      <div v-html="securepay"></div>
+      
     </v-card>
+    <div v-html="securepay"></div>
   </div>
 </template>
 
 <script>
-import billplz from '../../../config/config'
 import securepay from '../../../config/config_securepay'
 import signChecksum from '../../../helpers/securepaysign'
 
@@ -56,18 +56,6 @@ export default {
         //console.log(results.data.tenant)
         this.tenant = results.data.tenant
         console.log(this.$route.params)
-        if (this.$route.params.paid) {
-          const getBillApi = await this.$axios.create({
-            headers: {
-              Authorization: billplz.BILLPLZ_TOKEN,
-            },
-          })
-          const bill_url =
-            'https://www.billplz.com/api/v3/bills/' + this.$route.params.paid
-          const new_amount = await getBillApi.get(bill_url)
-          console.log(bill_url)
-          //https://www.billplz.com/api/v3/bills/
-        }
       } catch (e) {
         //console.log(e)
       }
