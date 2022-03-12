@@ -27,7 +27,6 @@
           </v-col>
         </div>
       </v-expand-transition>
-      
     </v-card>
     <div v-html="securepay"></div>
   </div>
@@ -95,39 +94,47 @@ export default {
 
       const resz = await signChecksum(this.tenant)
       console.log(resz)
-      if (resz) {
-        const data = {
-          buyer_name: this.tenant.name,
-          token: securepay.AUTH_TOKEN,
-          callback_url:
-            'https://webhook.site/ae3aa520-70ba-49ea-952c-b9db12f775ad',
-          redirect_url:
-            'https://webhook.site/ae3aa520-70ba-49ea-952c-b9db12f775ad',
-          order_number: '1234',
-          buyer_email: this.tenant.email,
-          buyer_phone: '',
-          transaction_amount: this.tenant.amount,
-          product_description: 'topup',
-          redirect_post:
-            'https://webhook.site/ae3aa520-70ba-49ea-952c-b9db12f775ad',
-          checksum: resz,
-        }
-        console.log(data)
+      const postBackend = await this.$axios.post(
+        '/securepay',
+        this.tenant
+      )
+      console.log(postBackend)
+      // if (resz) {
+      //   const data = {
+      //     buyer_name: this.tenant.name,
+      //     token: securepay.AUTH_TOKEN,
+      //     callback_url:
+      //       'https://webhook.site/ae3aa520-70ba-49ea-952c-b9db12f775ad',
+      //     redirect_url:
+      //       'https://webhook.site/ae3aa520-70ba-49ea-952c-b9db12f775ad',
+      //     order_number: '1234',
+      //     buyer_email: this.tenant.email,
+      //     buyer_phone: '',
+      //     transaction_amount: this.tenant.amount,
+      //     product_description: 'topup',
+      //     redirect_post:
+      //       'https://webhook.site/ae3aa520-70ba-49ea-952c-b9db12f775ad',
+      //     checksum: resz,
+      //   }
+      //   console.log(data)
 
-        const securePayApi = await this.$axios.create({
-          headers: {
-            Authorization: securepay.AUTH_TOKEN,
-          },
-        })
-        const res = await securePayApi.post(
-          'https://sandbox.securepay.my/api/v1/payments',
-          data
-        )
-        const html = res.data
-        this.securepay = html
+      //   const securePayApi = await this.$axios.create({
+      //     headers: {
+      //       Authorization: securepay.AUTH_TOKEN,
+      //     },
+      //   })
+      //   const res = await securePayApi.post(
+      //     'https://sandbox.securepay.my/api/v1/payments',
+      //     data
+      //   )
+      //   const html = res.data
+      //   console.log(res)
+      //   this.securepay = html
 
-        //window.open(res.data)
-      }
+      //   const sendBackend = await this.$axios.post('/securepay', { data: html })
+
+      //   //window.open(res.data)
+      // }
     },
   },
 }
