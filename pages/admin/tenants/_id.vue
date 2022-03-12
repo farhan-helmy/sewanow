@@ -32,6 +32,32 @@
                 </v-list-item-content>
                 <v-row align="center" justify="end">
                   <PropertyForm />
+                 
+                    <v-dialog
+                      v-model="transaction_table"
+                      persistent
+                      max-width="1000px"
+                    >
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                          color="indigo"
+                          dark
+                          v-bind="attrs"
+                          v-on="on"
+                          class="mx-2"
+                        >
+                          Transactions
+                        </v-btn>
+                      </template>
+                      <v-btn
+                        color="blue darken-1"
+                        @click="transaction_table = false"
+                      >
+                        Close
+                      </v-btn>
+                      <tenant-transactions-table />
+                    </v-dialog>
+                  
                   <v-dialog v-model="dialog" persistent max-width="600px">
                     <template v-slot:activator="{ on, attrs }">
                       <v-btn
@@ -147,9 +173,7 @@
               Show Properties
             </v-btn>
           </template>
-          <v-btn color="blue darken-1" @click="table = false">
-            Close
-          </v-btn>
+          <v-btn color="blue darken-1" @click="table = false"> Close </v-btn>
           <tenant-property-table />
         </v-dialog>
       </v-row>
@@ -182,10 +206,12 @@
 
 <script>
 import TenantPropertyTable from '~/components/TenantPropertyTable.vue'
+import TenantTransactionsTable from '~/components/TenantTransactions.vue'
 export default {
-  components: { TenantPropertyTable },
+  components: { TenantPropertyTable, TenantTransactionsTable },
   data: () => ({
     table: false,
+    transaction_table: false,
     user: [],
     send: [],
     properties: [],
@@ -207,7 +233,7 @@ export default {
       )
 
       this.user = tenant.data
-      console.log(tenant.data.properties)
+      //console.log(tenant.data.properties)
     },
     async updateUser() {
       this.send = {
@@ -217,7 +243,7 @@ export default {
         city: this.user.city,
         phone_no: this.user.phone_no,
         state: this.user.state,
-        status: this.user.status
+        status: this.user.status,
       }
       try {
         const tenant = await this.$axios.patch(

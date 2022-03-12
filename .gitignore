@@ -88,3 +88,6 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# Billplz api config
+config/config.js

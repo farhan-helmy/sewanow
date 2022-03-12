@@ -2,14 +2,14 @@
   <div>
     <v-data-table
       :headers="headers"
-      :items="properties"
+      :items="transactions"
       :search="search"
       sort-by="created_at"
       class="elevation-1"
     >
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title> Owned Property </v-toolbar-title>
+          <v-toolbar-title> Transactions </v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
           <v-text-field
@@ -24,17 +24,13 @@
 
         </v-toolbar>
       </template>
-      <template v-slot:item.is_due="{ item }">
-        <v-chip color="green" dark v-if="!item.is_due">
-          Not Due
+      <template v-slot:item.transaction_status="{ item }">
+        <v-chip color="green" dark v-if="item.transaction_status === 'SUCCESS'">
+          Success
         </v-chip>
-         <v-chip color="red" dark v-if="item.is_due">
-          Due
+         <v-chip color="red" dark v-if="item.transaction_status === 'FAILED'">
+          Failed
         </v-chip>
-      </template>
-      <template v-slot:item.actions="{ item }">
-        <v-icon medium @click="viewItem(item)"> mdi-eye </v-icon>
-        <v-icon medium @click="viewItem(item)"> mdi-delete </v-icon>
       </template>
       
       <template v-slot:no-data>
@@ -50,33 +46,38 @@ export default {
     search: '',
     headers: [
       {
-        text: 'Property type',
+        text: 'ID',
         align: 'start',
         sortable: false,
-        value: 'building_type',
+        value: 'id',
       }, 
       
       {
-        text: 'House Number',
+        text: 'Status',
         align: 'start',
         sortable: false,
-        value: 'house_number',
+        value: 'transaction_status',
       },
       {
-        text: 'Area',
+        text: 'Type',
         align: 'start',
         sortable: false,
-        value: 'area',
+        value: 'transaction_type',
       },
       {
-        text: 'Address',
+        text: 'Amount',
         align: 'start',
         sortable: false,
-        value: 'street_address',
+        value: 'amount',
       },
-      { text: 'Actions', value: 'actions', sortable: false },
+      {
+        text: 'Date',
+        align: 'start',
+        sortable: false,
+        value: 'created_at',
+      },
     ],
-    properties: [],
+    transactions: [],
   }),
 
   computed: {
@@ -102,7 +103,8 @@ export default {
     async initialize() {
       let results = await this.$axios.get( `/v1/tenant/${this.$route.params.id}`)
       //console.log(results.data.properties)
-      this.properties = results.data.properties
+      this.transactions = results.data.transactions
+      console.log(results.data.transactions)
     },
     viewItem(item) {
       this.$router.push(`/admin/properties/${item.id}`)

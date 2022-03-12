@@ -113,10 +113,7 @@
           </v-card>
         </v-dialog>
       </template>
-      <template v-slot:item.is_due="{ item }">
-        <v-chip color="green" dark v-if="!item.is_due"> Not Due </v-chip>
-        <v-chip color="red" dark v-if="item.is_due"> Due </v-chip>
-      </template>
+     
       <template v-slot:item.actions="{ item }">
         <v-icon medium @click="viewItem(item)"> mdi-eye </v-icon>
       </template>
@@ -168,18 +165,6 @@ export default {
         align: 'start',
         sortable: false,
         value: 'street_address',
-      },
-      {
-        text: 'Status',
-        align: 'start',
-        sortable: false,
-        value: 'is_due',
-      },
-      {
-        text: 'Due Date',
-        align: 'start',
-        sortable: false,
-        value: 'rent_due',
       },
       {
         text: 'Amount',

@@ -105,6 +105,11 @@
           </v-dialog>
         </v-toolbar>
       </template>
+       <template v-slot:item.wallet_bal="{ item }">
+        <v-chip :color="getBalanceColour(item.wallet_bal)" dark>
+          {{ item.wallet_bal }}
+        </v-chip>
+      </template>
       <template v-slot:item.status="{ item }">
         <v-chip :color="getColor(item.status)" dark>
           {{ item.status }}
@@ -146,16 +151,16 @@ export default {
         value: 'name',
       },
       {
+        text: 'Wallet Balance',
+        align: 'start',
+        sortable: false,
+        value: 'wallet_bal',
+      },
+      {
         text: 'Status',
         align: 'start',
         sortable: false,
         value: 'status',
-      },
-      {
-        text: 'Email',
-        align: 'start',
-        sortable: false,
-        value: 'email',
       },
       {
         text: 'Phone Number',
@@ -163,7 +168,7 @@ export default {
         sortable: false,
         value: 'phone_no',
       },
-      { text: 'Created At', value: 'created_at' },
+      
       { text: 'Actions', value: 'actions', sortable: false },
     ],
     tenants: [],
@@ -224,7 +229,7 @@ export default {
     },
     async initialize() {
       let results = await this.$axios.get('/v1/tenant/all')
-      console.log(results.data)
+      //console.log(results.data)
       this.tenants = results.data
     },
     viewItem(item) {
@@ -263,6 +268,13 @@ export default {
     getColor(status) {
       if (status === 'active') return 'green'
     },
+    getBalanceColour(wallet_bal){
+      if(wallet_bal < 0){
+        return 'red'
+      }else{
+        return 'green'
+      } 
+    }
   },
 }
 </script>

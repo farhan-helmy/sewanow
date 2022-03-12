@@ -78,3 +78,15 @@ export default {
   },
 }
 </script> 
+
+<style scoped>
+a {
+  font-style: normal;
+  color: black;
+  text-decoration: none;
+}
+
+a.nuxt-link-active {
+  font-weight: bold;
+}
+</style>

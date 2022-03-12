@@ -20,6 +20,7 @@
             </v-card>
           </v-item>
         </v-col>
+
         <v-col cols="12" md="4">
           <v-item>
             <v-card
@@ -30,24 +31,7 @@
             >
               <v-scroll-y-transition>
                 <div class="text-h2 flex-grow-1 text-center">
-                  0
-                  <p class="text-h5">Rent Overdue</p>
-                </div>
-              </v-scroll-y-transition>
-            </v-card>
-          </v-item>
-        </v-col>
-        <v-col cols="12" md="4">
-          <v-item>
-            <v-card
-              color="active"
-              class="d-flex align-center"
-              dark
-              height="200"
-            >
-              <v-scroll-y-transition>
-                <div class="text-h2 flex-grow-1 text-center">
-                  RM 4000
+                  RM {{this.revenue}}
                   <p class="text-h5">Revenue</p>
                 </div>
               </v-scroll-y-transition>
@@ -69,8 +53,18 @@ export default {
     revenue: '',
   }),
   async fetch() {
+    var total = 0
     const result = await this.$axios.$get('/v1/user/me')
-    console.log(result.user.tenants.length)
+    const res = await this.$axios.get('/v1/tenant/all')
+    const tenants = res.data
+
+    tenants.forEach((tenant) => {
+      //console.log(tenant.wallet_bal)
+       total += tenant.wallet_bal
+    })
+    //console.log(total)
+    this.revenue = total
+    //console.log(result.user.tenants.length)
     this.tenantcount = result.user.tenants.length
   },
 }

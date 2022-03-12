@@ -24,6 +24,17 @@
             </v-list-item-content>
           </v-list-item>
         </nuxt-link>
+        <nuxt-link to="/tenant/wallet">
+          <v-list-item link>
+            <v-list-item-icon>
+              <v-icon>mdi-wallet</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>Wallet</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </nuxt-link>
       </v-list>
 
       <template v-slot:append>
@@ -67,3 +78,16 @@ export default {
   },
 }
 </script> 
+
+<style scoped>
+a {
+  font-style: normal;
+  color: black;
+  text-decoration: none;
+}
+
+a.nuxt-link-active {
+  font-weight: bold;
+}
+</style>
+
