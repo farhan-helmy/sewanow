@@ -43,7 +43,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: process.env.BASE_URL
+    baseURL: "http://dev.sewanow.com"
   },
 
   //auth module configuration
