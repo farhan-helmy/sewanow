@@ -21,18 +21,47 @@
           </v-col>
           <v-col class="d-flex" cols="12" sm="6">
             <v-text-field v-model.number="amount" label="RM"></v-text-field>
+            <v-text-field v-model="signed" label=""></v-text-field>
           </v-col>
           <v-col class="d-flex" cols="12" sm="6">
-            <v-btn @click="topupSecurePay()">submit</v-btn>
+            <v-btn @click="getSign()">submit</v-btn>
+            <v-btn v-if="signed" @click="topupSecurePay()"> topup</v-btn>
           </v-col>
         </div>
       </v-expand-transition>
     </v-card>
-    <div v-html="securepay"></div>
+    <div>
+      <form
+        method="POST"
+        action="https://sandbox.securepay.my/api/v1/payments"
+        ref="form"
+      >
+        <input type="hidden" name="buyer_name" :value="tenant.name" />
+        <input type="hidden" name="buyer_email" :value="tenant.email" />
+        <input type="hidden" name="token" :value="tenant.token" />
+        <input type="hidden" name="transaction_amount" :value="amount" />
+        <input type="hidden" name="checksum" :value="tenant.checksum" />
+        <input type="hidden" name="callback_url" :value="tenant.callback_url" />
+        <input type="hidden" name="redirect_url" :value="tenant.redirect_url" />
+        <input type="hidden" name="order_number" :value="tenant.order_number" />
+        <input type="hidden" name="buyer_phone" :value="tenant.buyer_phone" />
+        <input
+          type="hidden"
+          name="product_description"
+          :value="tenant.product_description"
+        />
+        <input
+          type="hidden"
+          name="redirect_post"
+          :value="tenant.redirect_post"
+        />
+      </form>
+    </div>
   </div>
 </template>
 
 <script>
+import billplz from '../../../config/config'
 import securepay from '../../../config/config_securepay'
 import signChecksum from '../../../helpers/securepaysign'
 
@@ -41,8 +70,8 @@ export default {
   data: () => ({
     show: false,
     amount: null,
+    signed: null,
     tenant: [],
-    securepay: '',
   }),
   created() {
     this.initialize()
@@ -89,52 +118,25 @@ export default {
       }
     },
 
-    async topupSecurePay() {
+    async getSign() {
       this.tenant.amount = this.amount
 
-      const resz = await signChecksum(this.tenant)
-      console.log(resz)
-      const postBackend = await this.$axios.post(
-        '/securepay',
-        this.tenant
-      )
-      console.log(postBackend)
-      // if (resz) {
-      //   const data = {
-      //     buyer_name: this.tenant.name,
-      //     token: securepay.AUTH_TOKEN,
-      //     callback_url:
-      //       'https://webhook.site/ae3aa520-70ba-49ea-952c-b9db12f775ad',
-      //     redirect_url:
-      //       'https://webhook.site/ae3aa520-70ba-49ea-952c-b9db12f775ad',
-      //     order_number: '1234',
-      //     buyer_email: this.tenant.email,
-      //     buyer_phone: '',
-      //     transaction_amount: this.tenant.amount,
-      //     product_description: 'topup',
-      //     redirect_post:
-      //       'https://webhook.site/ae3aa520-70ba-49ea-952c-b9db12f775ad',
-      //     checksum: resz,
-      //   }
-      //   console.log(data)
+      this.signed = await signChecksum(this.tenant)
+      this.tenant.checksum = this.signed
+      this.tenant.callback_url =
+        'http://dev.sewanow.com/transaction_securepay/callback'
+      this.tenant.redirect_url =
+        'https://sewanow.com/tenant/wallet'
+      this.tenant.order_number = '1234'
+      this.tenant.buyer_phone = ''
+      this.tenant.product_description = 'topup'
+      this.tenant.redirect_post =
+        'https://sewanow.com/tenant/wallet'
+      this.tenant.token = securepay.AUTH_TOKEN
+    },
 
-      //   const securePayApi = await this.$axios.create({
-      //     headers: {
-      //       Authorization: securepay.AUTH_TOKEN,
-      //     },
-      //   })
-      //   const res = await securePayApi.post(
-      //     'https://sandbox.securepay.my/api/v1/payments',
-      //     data
-      //   )
-      //   const html = res.data
-      //   console.log(res)
-      //   this.securepay = html
-
-      //   const sendBackend = await this.$axios.post('/securepay', { data: html })
-
-      //   //window.open(res.data)
-      // }
+    async topupSecurePay() {
+      this.$refs.form.submit()
     },
   },
 }
