@@ -123,14 +123,14 @@ export default {
       this.signed = await signChecksum(this.tenant)
       this.tenant.checksum = this.signed
       this.tenant.callback_url =
-        'http://dev.sewanow.com/transaction_securepay/callback'
+        'https://dev.sewanow.com/transaction_securepay/callback'
       this.tenant.redirect_url =
         'https://sewanow.com/tenant/wallet'
       this.tenant.order_number = '1234'
       this.tenant.buyer_phone = ''
       this.tenant.product_description = 'topup'
       this.tenant.redirect_post =
-        'https://sewanow.com/tenant/wallet'
+        'https://dev.sewanow.com/transaction_securepay/callback'
       this.tenant.token = securepay.AUTH_TOKEN
     },
 
