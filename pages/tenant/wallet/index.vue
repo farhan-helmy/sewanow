@@ -61,7 +61,6 @@
 </template>
 
 <script>
-import billplz from '../../../config/config'
 import securepay from '../../../config/config_securepay'
 import signChecksum from '../../../helpers/securepaysign'
 
