@@ -130,7 +130,7 @@ export default {
       this.tenant.buyer_phone = ''
       this.tenant.product_description = 'topup'
       this.tenant.redirect_post =
-        'https://dev.sewanow.com/transaction_securepay/callback'
+        'true'
       this.tenant.token = securepay.AUTH_TOKEN
     },
 
