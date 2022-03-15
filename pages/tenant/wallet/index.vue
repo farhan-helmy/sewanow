@@ -63,6 +63,7 @@
 <script>
 import securepay from '../../../config/config_securepay'
 import signChecksum from '../../../helpers/securepaysign'
+import {v4 as uuidv4} from 'uuid'
 
 export default {
   layout: 'tenant',
@@ -118,7 +119,9 @@ export default {
     },
 
     async getSign() {
+      var order_num = uuidv4()
       this.tenant.amount = this.amount
+      this.tenant.order_number = order_num
 
       this.signed = await signChecksum(this.tenant)
       this.tenant.checksum = this.signed
@@ -126,7 +129,7 @@ export default {
         'https://dev.sewanow.com/transaction_securepay/callback'
       this.tenant.redirect_url =
         'https://sewanow.com/tenant/wallet'
-      this.tenant.order_number = '1234'
+      this.tenant.order_number = order_num
       this.tenant.buyer_phone = ''
       this.tenant.product_description = 'topup'
       this.tenant.token = securepay.AUTH_TOKEN
