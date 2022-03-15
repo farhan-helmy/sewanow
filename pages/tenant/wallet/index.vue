@@ -129,8 +129,6 @@ export default {
       this.tenant.order_number = '1234'
       this.tenant.buyer_phone = ''
       this.tenant.product_description = 'topup'
-      this.tenant.redirect_post =
-        'true'
       this.tenant.token = securepay.AUTH_TOKEN
     },
 
