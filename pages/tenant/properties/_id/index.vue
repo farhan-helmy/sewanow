@@ -44,21 +44,8 @@
                     <span class="font-weight-bold"> Rent amount:</span> RM
                     {{ properties.rent_amount }}
                   </v-list-item-title>
-                  <v-list-item-title>
-                    <span class="font-weight-bold"> Rent pay date: </span>on
-                    {{ properties.rent_due }}th every month
-                  </v-list-item-title>
                 </v-list-item-content>
                 <v-row align="center" justify="end">
-                  <v-btn
-                    color="black"
-                    dark
-                    v-bind="attrs"
-                    v-on="on"
-                    class="mx-2"
-                  >
-                    pay rent
-                  </v-btn>
                   <v-btn
                     color="indigo"
                     dark

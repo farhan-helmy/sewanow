@@ -6,6 +6,7 @@
         <v-col cols="12" md="6">
           <v-item>
             <v-card
+            @click="pushProperty"
               color="active"
               class="d-flex align-center"
               dark
@@ -57,5 +58,10 @@ export default {
     console.log(result)
     this.tenantcount = result.tenant.properties.length
   },
+  methods: {
+    pushProperty(){
+      this.$router.push('/tenant/properties')
+    }
+  }
 }
 </script>

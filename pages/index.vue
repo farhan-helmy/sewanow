@@ -8,7 +8,7 @@
 
         <v-spacer></v-spacer>
 
-        <v-btn href="http://localhost:5050/tenant/login" target="_blank" text>
+        <v-btn href="https://sewanow.com/tenant/login" target="_blank" text>
           <span class="mr-2">TENANT</span>
           <v-icon>mdi-home</v-icon>
         </v-btn>

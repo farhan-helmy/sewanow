@@ -21,7 +21,7 @@
           </v-col>
           <v-col class="d-flex" cols="12" sm="6">
             <v-text-field v-model.number="amount" label="RM"></v-text-field>
-            <v-text-field v-model="signed" label=""></v-text-field>
+            <v-text-field type="hidden" v-model="signed" label=""></v-text-field>
           </v-col>
           <v-col class="d-flex" cols="12" sm="6">
             <v-btn @click="getSign()">submit</v-btn>

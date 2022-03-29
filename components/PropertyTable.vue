@@ -57,7 +57,7 @@
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
-                      v-model.number="property.house_number"
+                      v-model="property.house_number"
                       label="House Number"
                     ></v-text-field>
                   </v-col>
@@ -83,13 +83,6 @@
                       ]"
                       label="State"
                     ></v-autocomplete>
-                  </v-col>
-                  <v-col cols="12" sm="6">
-                    <v-text-field
-                      label="Rent due"
-                      required
-                      v-model.number="property.rent_due"
-                    ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6">
                     <v-text-field
@@ -176,16 +169,13 @@ export default {
     ],
     tenants: [],
     states: [],
-    property: [],
-    formData: {
-      name: '',
-      email: '',
-      phone_no: '',
-      zip_code: '',
-      state: '',
-      city: '',
+    property: {
+      building_type: '',
+      house_number: '',
+      city:'',
       street_address: '',
-      user_id: '',
+      state: '',
+      rent_amount: ''
     },
   }),
 

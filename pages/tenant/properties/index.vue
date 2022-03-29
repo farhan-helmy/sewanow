@@ -58,18 +58,6 @@ export default {
         value: 'building_type',
       },
       {
-        text: 'Status',
-        align: 'start',
-        sortable: false,
-        value: 'is_due',
-      },
-      {
-        text: 'Due Date',
-        align: 'start',
-        sortable: false,
-        value: 'rent_due',
-      },
-      {
         text: 'Amount',
         align: 'start',
         sortable: false,
