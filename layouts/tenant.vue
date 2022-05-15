@@ -24,14 +24,14 @@
             </v-list-item-content>
           </v-list-item>
         </nuxt-link>
-        <nuxt-link to="/tenant/wallet">
+        <nuxt-link to="/tenant/bills">
           <v-list-item link>
             <v-list-item-icon>
-              <v-icon>mdi-wallet</v-icon>
+              <v-icon>mdi-file-outline</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
-              <v-list-item-title>Wallet</v-list-item-title>
+              <v-list-item-title>Bills</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </nuxt-link>
