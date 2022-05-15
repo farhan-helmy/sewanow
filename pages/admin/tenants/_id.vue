@@ -32,32 +32,64 @@
                 </v-list-item-content>
                 <v-row align="center" justify="end">
                   <PropertyForm />
-                 
-                    <v-dialog
-                      v-model="transaction_table"
-                      persistent
-                      max-width="1000px"
-                    >
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-btn
-                          color="indigo"
-                          dark
-                          v-bind="attrs"
-                          v-on="on"
-                          class="mx-2"
-                        >
-                          Transactions
-                        </v-btn>
-                      </template>
+
+                  <v-dialog
+                    v-model="transaction_table"
+                    persistent
+                    max-width="1000px"
+                  >
+                    <template v-slot:activator="{ on, attrs }">
                       <v-btn
-                        color="blue darken-1"
-                        @click="transaction_table = false"
+                        color="indigo"
+                        dark
+                        v-bind="attrs"
+                        v-on="on"
+                        class="mx-2"
                       >
-                        Close
+                        Transactions
                       </v-btn>
-                      <tenant-transactions-table />
-                    </v-dialog>
-                  
+                    </template>
+                    <v-btn
+                      color="blue darken-1"
+                      @click="transaction_table = false"
+                    >
+                      Close
+                    </v-btn>
+                    <tenant-transactions-table />
+                  </v-dialog>
+                  <v-dialog v-model="upload_form" persistent max-width="1000px">
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn
+                        color="green darken-1"
+                        dark
+                        v-bind="attrs"
+                        v-on="on"
+                        class="mx-2"
+                      >
+                        Upload Document
+                      </v-btn>
+                    </template>
+                    <v-btn color="blue darken-1" @click="upload_form = false">
+                      Close
+                    </v-btn>
+                    <div>
+                      <v-card>
+                        <v-file-input
+                          chips
+                          filled
+                          label="Upload Here"
+                          @change="selectFile"
+                        ></v-file-input>
+                        <v-col cols="4" class="pl-2">
+                          <v-btn color="success" dark small @click="upload">
+                            Upload
+                            <v-icon right dark>mdi-cloud-upload</v-icon>
+                          </v-btn>
+                        </v-col>
+                      </v-card>
+                    </div>
+                  </v-dialog>
+
                   <v-dialog v-model="dialog" persistent max-width="600px">
                     <template v-slot:activator="{ on, attrs }">
                       <v-btn
@@ -178,7 +210,12 @@
         </v-dialog>
       </v-row>
     </v-container>
-    <v-snackbar v-model="snackbar" :timeout="timeout">
+    <v-snackbar
+      v-model="snackbar"
+      :timeout="timeout"
+      color="deep-purple accent-4"
+      elevation="24"
+    >
       {{ text }}
 
       <template v-slot:action="{ attrs }">
@@ -212,9 +249,14 @@ export default {
   data: () => ({
     table: false,
     transaction_table: false,
+    upload_form: false,
     user: [],
     send: [],
     properties: [],
+    currentFile: undefined,
+    progress: 0,
+    message: '',
+    fileInfos: [],
     dialog: false,
     snackbar: false,
     snackbarDeactive: false,
@@ -289,6 +331,39 @@ export default {
         }
       } catch (e) {
         console.log(e)
+      }
+    },
+    selectFile(file) {
+      this.progress = 0
+      this.currentFile = file
+      console.log(this.currentFile)
+    },
+    async upload() {
+      if (!this.currentFile) {
+        this.message = 'Please select a file!'
+        return
+      }
+      this.message = ''
+
+      let formData = new FormData()
+
+      formData.append('file', this.currentFile)
+      formData.append('tenant_id', this.$route.params.id)
+
+      console.log(this.currentFile)
+
+      let res = await this.$axios.post('/v1/multiple-upload', formData, {
+        headers: {
+          'Content-Type':
+            'multipart/form-data; boundary=---011000010111000001101001',
+        },
+      })
+      console.log(res)
+
+      if (res.status === 200) {
+        this.text = 'Document uploaded!'
+        this.upload_form = false
+        this.snackbar = true
       }
     },
   },

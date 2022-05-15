@@ -159,7 +159,7 @@ export default {
   },
   async fetch() {
     const results = await this.$axios.$get('/v1/property/all')
-    console.log(results)
+    //console.log(results)
     results.forEach((result) => {
       this.properties.push(result.full_address)
     })
@@ -174,7 +174,7 @@ export default {
         '/v1/property/adduser',
         this.property
       )
-      console.log(response)
+      //console.log(response)
       if (response.status === 201) {
         this.dialog = false
         this.snackbar = true

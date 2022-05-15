@@ -27,6 +27,9 @@
               <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
                 Add Tenant
               </v-btn>
+              <v-btn @click="getExcel" color="primary" dark class="mb-2">
+                Generate Excel
+              </v-btn>
             </template>
             <v-card>
               <v-card-title>
@@ -105,11 +108,6 @@
           </v-dialog>
         </v-toolbar>
       </template>
-       <template v-slot:item.wallet_bal="{ item }">
-        <v-chip :color="getBalanceColour(item.wallet_bal)" dark>
-          {{ item.wallet_bal }}
-        </v-chip>
-      </template>
       <template v-slot:item.status="{ item }">
         <v-chip :color="getColor(item.status)" dark>
           {{ item.status }}
@@ -151,12 +149,6 @@ export default {
         value: 'name',
       },
       {
-        text: 'Wallet Balance',
-        align: 'start',
-        sortable: false,
-        value: 'wallet_bal',
-      },
-      {
         text: 'Status',
         align: 'start',
         sortable: false,
@@ -168,7 +160,7 @@ export default {
         sortable: false,
         value: 'phone_no',
       },
-      
+
       { text: 'Actions', value: 'actions', sortable: false },
     ],
     tenants: [],
@@ -261,6 +253,13 @@ export default {
       }
       //this.close()
     },
+    async getExcel() {
+      try {
+        window.open('http://localhost:3001/v1/tenant/all/download')
+      } catch (e) {
+        console.log(e)
+      }
+    },
     getUser() {
       this.user = this.$store.getters.getUserInfo
       this.formData.user_id = this.user.id
@@ -268,13 +267,6 @@ export default {
     getColor(status) {
       if (status === 'active') return 'green'
     },
-    getBalanceColour(wallet_bal){
-      if(wallet_bal < 0){
-        return 'red'
-      }else{
-        return 'green'
-      } 
-    }
   },
 }
 </script>
