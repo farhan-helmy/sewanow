@@ -91,9 +91,9 @@ export default {
       let results = await this.$axios.get(
         `/v1/property/${this.$route.params.id}`
       )
-      //console.log(results.data.properties)
+      
       this.bills = results.data.bills
-      console.log(results.data.bills)
+      
     },
     viewItem(item) {
       this.$router.push(`/admin/properties/${item.id}`)

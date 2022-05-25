@@ -3,7 +3,7 @@ const CryptoJS = require("crypto-js")
 const signChecksum = (tenant) => {
   //console.log(tenant.amount)
   console.log('fuck',tenant)
-  const callback_url = "https://webhook.site/eec14aa9-a74c-466b-b700-2f89e4972e89"
+  const callback_url = "https://dev.sewanow.com/transaction_securepay/callback"
   const uid = "952f4512-357d-4e82-abbd-03e4bc1fd7e3"
   const checsum = "76519d9a473d3d51f6b53fe57083924e7fcf4b9eee48201f17ae09a0c6d14d64"
 

@@ -32,6 +32,7 @@
                 </v-list-item-content>
                 <v-row align="center" justify="end">
                   <PropertyForm />
+                  
 
                   <v-dialog
                     v-model="transaction_table"
@@ -208,6 +209,15 @@
           <v-btn color="blue darken-1" @click="table = false"> Close </v-btn>
           <tenant-property-table />
         </v-dialog>
+         <v-dialog v-model="change_password" persistent max-width="1000px">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn color="indigo" dark v-bind="attrs" v-on="on" class="mx-2">
+              Tukar Password
+            </v-btn>
+          </template>
+          <v-btn color="blue darken-1" @click="change_password = false"> Close </v-btn>
+         <ChangePassword :password="password" :confirm_password="confirm_password" :change_password="change_password"/>
+        </v-dialog>
       </v-row>
     </v-container>
     <v-snackbar
@@ -244,8 +254,10 @@
 <script>
 import TenantPropertyTable from '~/components/TenantPropertyTable.vue'
 import TenantTransactionsTable from '~/components/TenantTransactions.vue'
+import ChangePassword from '~/components/forms/ChangePassword.vue'
+
 export default {
-  components: { TenantPropertyTable, TenantTransactionsTable },
+  components: { TenantPropertyTable, TenantTransactionsTable, ChangePassword},
   data: () => ({
     table: false,
     transaction_table: false,
@@ -264,6 +276,9 @@ export default {
     textDeactive: 'Tenant deactivated!',
     timeout: 2000,
     timeoutDeactive: 2000,
+    change_password: false,
+    password: null,
+    confirm_password: null
   }),
   mounted() {
     this.getUser()
