@@ -221,13 +221,13 @@ export default {
     },
     async initialize() {
       let results = await this.$axios.get('/v1/property/all')
-      console.log(results.data)
+    
       this.tenants = results.data
     },
     async addProperty() {
-      console.log(this.property)
+      
       let response = await this.$axios.post('/v1/property/add', this.property)
-      console.log(response)
+      
       if (response.status === 201) {
         this.propertyForm = false
         this.snackbar = true

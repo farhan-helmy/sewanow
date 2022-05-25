@@ -51,7 +51,7 @@
           pay
         </v-btn>
 
-        <v-btn v-else color="primary" @click="viewBill(item)"> view </v-btn>
+        <v-btn v-else color="primary" @click="viewBill(item)"> View Bill </v-btn>
       </template>
     </v-data-table>
     <div>
@@ -74,6 +74,7 @@
           name="product_description"
           :value="tenant.product_description"
         />
+        <input type="hidden" name="params" :value="tenant.params" />
         <input
           type="hidden"
           name="redirect_post"
@@ -171,8 +172,13 @@ export default {
     getColor(status) {
       if (status === false) return 'green'
     },
+    viewBill(item) {
+      console.log(item)
+      window.open(item.receipt_url)
+    },
 
     getSign(item) {
+      var params
       this.latestamt = item.amount
       var order_num = uuidv4()
       this.tenant.product_description = item.id
@@ -182,12 +188,12 @@ export default {
       console.log(this.signed)
       this.tenant.checksum = this.signed
       this.tenant.callback_url =
-        'https://webhook.site/eec14aa9-a74c-466b-b700-2f89e4972e89'
+        'https://dev.sewanow.com/transaction_securepay/callback'
       this.tenant.redirect_url = 'https://sewanow.com/tenant/bills'
       this.tenant.buyer_phone = ''
       this.tenant.token = securepay.AUTH_TOKEN
       console.log(item.id)
-      //this.tenant.params = [{ item: item.id }]
+      this.tenant.params = `{'reference1_label':'bill_id', 'reference1': '${item.id}'}`
 
       //console.log(securepay.AUTH_TOKEN)
     },
