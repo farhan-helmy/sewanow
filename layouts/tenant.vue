@@ -24,7 +24,7 @@
             </v-list-item-content>
           </v-list-item>
         </nuxt-link>
-        <nuxt-link to="/tenant/bills">
+        <!-- <nuxt-link to="/tenant/bills">
           <v-list-item link>
             <v-list-item-icon>
               <v-icon>mdi-file-outline</v-icon>
@@ -34,7 +34,7 @@
               <v-list-item-title>Bills</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-        </nuxt-link>
+        </nuxt-link> -->
       </v-list>
 
       <template v-slot:append>

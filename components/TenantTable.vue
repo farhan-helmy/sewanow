@@ -255,7 +255,7 @@ export default {
     },
     async getExcel() {
       try {
-        window.open('http://localhost:3001/v1/tenant/all/download')
+        window.open('https://dev.sewanow.com/v1/tenant/all/download')
       } catch (e) {
         console.log(e)
       }
