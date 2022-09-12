@@ -22,7 +22,7 @@
           </v-item>
         </v-col>
 
-        <v-col cols="12" md="4">
+        <!-- <v-col cols="12" md="4">
           <v-item>
             <v-card
               color="active"
@@ -72,7 +72,7 @@
               </v-scroll-y-transition>
             </v-card>
           </v-item>
-        </v-col>
+        </v-col> -->
       </v-row>
     </v-container>
   </v-item-group>
