@@ -47,10 +47,22 @@
                 hint="Masukkan username anda"
               />
               <v-text-field
+                v-if="showPassword"
+                v-model="loginData.password"
+                label="Password"
+                type="text"
+                prepend-icon="mdi-lock"
+                append-icon="mdi-eye"
+                @click:append="showPassword = !showPassword"
+              />
+              <v-text-field
+                v-else
                 v-model="loginData.password"
                 label="Password"
                 type="password"
                 prepend-icon="mdi-lock"
+                append-icon="mdi-eye"
+                @click:append="showPassword = !showPassword"
               />
               <v-row justify="center">
                 <v-btn type="submit">Login</v-btn>
@@ -79,7 +91,8 @@ export default {
       email: '',
       password: '',
     },
-    error: false
+    showPassword: false,
+    error: false,
   }),
   methods: {
     async login() {

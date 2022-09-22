@@ -35,9 +35,6 @@
                     v-model="senha"
                     label="Password"
                   ></v-text-field>
-                  <v-btn class="green darken-1" type="submit" large dark
-                    >Let's go</v-btn
-                  >
                 </v-form>
               </v-card-text>
             </v-card>
@@ -87,5 +84,4 @@ export default {
 </script>
 
 <style>
-
 </style>

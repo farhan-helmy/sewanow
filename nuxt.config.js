@@ -21,8 +21,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-  ],
+  plugins: [],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -43,14 +42,14 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: "https://dev.sewanow.com"
+    baseURL: 'http://localhost:3001',
   },
 
   //auth module configuration
   auth: {
     strategies: {
       local: {
-        scheme: "local",
+        scheme: 'local',
         token: {
           property: 'token', //property name that the Back-end sends for you as a access token for saving on localStorage and cookie of user browser
           global: true,
@@ -73,7 +72,7 @@ export default {
         },
       },
       local2: {
-        scheme: "local",
+        scheme: 'local',
         token: {
           property: 'token', //property name that the Back-end sends for you as a access token for saving on localStorage and cookie of user browser
           global: true,
@@ -89,7 +88,7 @@ export default {
         //        data: "refresh_token", // data can be used to set the name of the property you want to send in the request.
         //      },
         endpoints: {
-          login: {url: '/v1/tenant/login', method: 'post'},
+          login: { url: '/v1/tenant/login', method: 'post' },
           //        refresh: { url: "/api/auth/refresh-token", method: "post" },
           logout: false, //  we don't have an endpoint for our logout in our API and we just remove the token from localstorage
           user: { url: '/v1/tenant/me', method: 'get' },

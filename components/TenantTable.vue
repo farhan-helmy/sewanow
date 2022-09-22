@@ -108,10 +108,11 @@
           </v-dialog>
         </v-toolbar>
       </template>
-      <template v-slot:item.status="{ item }">
-        <v-chip :color="getColor(item.status)" dark>
-          {{ item.status }}
+      <template v-slot:item.last_login="{ item }">
+        <v-chip v-if="item.last_login" color="black" dark>
+          {{ item.last_login }}
         </v-chip>
+        <v-chip v-else color="red" dark> Tidak pernah login </v-chip>
       </template>
       <template v-slot:item.actions="{ item }">
         <v-icon medium @click="viewItem(item)"> mdi-eye </v-icon>
@@ -149,10 +150,10 @@ export default {
         value: 'name',
       },
       {
-        text: 'Status',
+        text: 'Last Login',
         align: 'start',
         sortable: false,
-        value: 'status',
+        value: 'last_login',
       },
       {
         text: 'Phone Number',
