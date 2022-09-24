@@ -120,8 +120,7 @@
                         bg-transparent
                         text-gray-800
                         dark:text-gray-100
-                        focus:outline-none
-                        focus:border focus:border-indigo-700
+                        focus:outline-none focus:border focus:border-indigo-700
                         font-normal
                         py-3
                         flex
@@ -183,8 +182,7 @@
                         w-full
                         text-sm
                         border border-transparent
-                        focus:outline-none
-                        focus:border-indigo-700
+                        focus:outline-none focus:border-indigo-700
                         text-gray-800
                         dark:text-gray-100
                         rounded
@@ -504,7 +502,7 @@ export default {
       street_address: '',
       user_id: '',
     },
-    is_succeed: false
+    is_succeed: false,
   }),
   methods: {
     fetchCities() {
@@ -529,15 +527,18 @@ export default {
     },
     async submitForm() {
       try {
-        console.log(this.formData)
-        let response = await this.$axios.post('/v1/tenant/register', this.formData)
+        //console.log(this.formData)
+        let response = await this.$axios.post(
+          '/v1/tenant/register',
+          this.formData
+        )
 
-        console.log(response.status)
-        if(response.status === 201){
+        //console.log(response.status)
+        if (response.status === 201) {
           this.$router.push('/admin/tenants?success=true')
         }
       } catch (e) {
-        console.log(e)
+        //console.log(e)
       }
     },
     getUser() {

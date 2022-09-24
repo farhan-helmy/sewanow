@@ -51,7 +51,9 @@
           pay
         </v-btn>
 
-        <v-btn v-else color="primary" @click="viewBill(item)"> View Bill </v-btn>
+        <v-btn v-else color="primary" @click="viewBill(item)">
+          View Bill
+        </v-btn>
       </template>
     </v-data-table>
     <div>
@@ -173,7 +175,7 @@ export default {
       if (status === false) return 'green'
     },
     viewBill(item) {
-      console.log(item)
+      //console.log(item)
       window.open(item.receipt_url)
     },
 
@@ -185,14 +187,14 @@ export default {
       this.tenant.amount = item.amount
       this.tenant.order_number = order_num
       this.signed = signChecksum(this.tenant)
-      console.log(this.signed)
+      //console.log(this.signed)
       this.tenant.checksum = this.signed
       this.tenant.callback_url =
         'https://dev.sewanow.com/transaction_securepay/callback'
       this.tenant.redirect_url = 'https://sewanow.com/tenant/bills'
       this.tenant.buyer_phone = ''
       this.tenant.token = securepay.AUTH_TOKEN
-      console.log(item.id)
+      //console.log(item.id)
       this.tenant.params = `{'reference1_label':'bill_id', 'reference1': '${item.id}'}`
 
       //console.log(securepay.AUTH_TOKEN)

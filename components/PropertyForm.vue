@@ -169,7 +169,7 @@ export default {
     async addProperty() {
       this.property.tenant_id = this.$route.params.id
 
-      console.log(this.property)
+      //console.log(this.property)
       let response = await this.$axios.post(
         '/v1/property/adduser',
         this.property

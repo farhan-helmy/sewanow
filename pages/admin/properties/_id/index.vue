@@ -129,7 +129,7 @@ export default {
         this.success = true
         this.add_payment_form = false
       }
-      console.log(data)
+      //console.log(data)
       //console.log(result)
     },
     validate() {

@@ -65,9 +65,9 @@ export default {
           data: this.loginData,
         })
         this.$router.push('/admin/home')
-        console.log(response)
+        //console.log(response)
       } catch (err) {
-        console.log(err)
+        //console.log(err)
       }
     },
     sub: function (event) {

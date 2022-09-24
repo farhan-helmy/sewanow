@@ -250,7 +250,7 @@ export default {
           this.$nuxt.refresh()
         }
       } catch (e) {
-        console.log(e)
+        //console.log(e)
       }
       //this.close()
     },
@@ -258,7 +258,7 @@ export default {
       try {
         window.open('https://dev.sewanow.com/v1/tenant/all/download')
       } catch (e) {
-        console.log(e)
+        //console.log(e)
       }
     },
     getUser() {

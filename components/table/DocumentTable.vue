@@ -2,14 +2,14 @@
   <div>
     <v-data-table
       :headers="headers"
-      :items="transactions"
+      :items="documents"
       :search="search"
       sort-by="created_at"
       class="elevation-1"
     >
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title> Transactions </v-toolbar-title>
+          <v-toolbar-title> Document </v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
           <v-text-field
@@ -23,17 +23,8 @@
           <v-spacer></v-spacer>
         </v-toolbar>
       </template>
-      <template v-slot:item.transaction_status="{ item }">
-        <v-chip color="green" dark v-if="item.transaction_status === 'SUCCESS'">
-          Success
-        </v-chip>
-        <v-chip color="red" dark v-if="item.transaction_status === 'FAILED'">
-          Failed
-        </v-chip>
-      </template>
-
-      <template v-slot:no-data>
-        <v-btn color="primary" @click="initialize"> Reset </v-btn>
+      <template v-slot:item.actions="{ item }">
+        <v-icon medium @click="viewItem(item)"> mdi-eye </v-icon>
       </template>
     </v-data-table>
   </div>
@@ -45,38 +36,21 @@ export default {
     search: '',
     headers: [
       {
-        text: 'ID',
+        text: 'File Name',
         align: 'start',
         sortable: false,
-        value: 'id',
+        value: 'filename',
       },
 
       {
-        text: 'Status',
-        align: 'start',
-        sortable: false,
-        value: 'transaction_status',
-      },
-      {
-        text: 'Type',
-        align: 'start',
-        sortable: false,
-        value: 'transaction_type',
-      },
-      {
-        text: 'Amount',
-        align: 'start',
-        sortable: false,
-        value: 'amount',
-      },
-      {
-        text: 'Date',
+        text: 'Created At',
         align: 'start',
         sortable: false,
         value: 'created_at',
       },
+      { text: 'Actions', value: 'actions', sortable: false },
     ],
-    transactions: [],
+    documents: [],
   }),
 
   computed: {
@@ -100,13 +74,11 @@ export default {
 
   methods: {
     async initialize() {
-      let results = await this.$axios.get(`/v1/tenant/${this.$route.params.id}`)
-      //console.log(results.data.properties)
-      this.transactions = results.data.transactions
-      //console.log(results.data.transactions)
-    },
-    viewItem(item) {
-      this.$router.push(`/admin/properties/${item.id}`)
+      let results = await this.$axios.get(
+        `/v1/tenant/${this.$route.params.id}/documents`
+      )
+      console.log(results)
+      this.documents = results.data.documents
     },
     async deleteItem(item) {
       let result = await this.$axios.post('')
@@ -118,8 +90,12 @@ export default {
         this.editedIndex = -1
       })
     },
-    getColor(status) {
-      if (status === false) return 'green'
+    async viewItem(item) {
+      let res = await this.$axios.get(`/v1/documents/${item.id}`)
+      if (res.status === 200) {
+        window.open(`http://localhost:3001/v1/documents/${item.id}`)
+      }
+      //console.log(res)
     },
   },
 }
