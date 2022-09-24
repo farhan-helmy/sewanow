@@ -95,7 +95,6 @@ export default {
       if (res.status === 200) {
         window.open(`https://dev.sewanow.com/v1/documents/${item.id}`)
       }
-      //console.log(res)
     },
   },
 }
