@@ -93,7 +93,7 @@ export default {
     async viewItem(item) {
       let res = await this.$axios.get(`/v1/documents/${item.id}`)
       if (res.status === 200) {
-        window.open(`http://localhost:3001/v1/documents/${item.id}`)
+        window.open(`https://dev.sewanow.com/v1/documents/${item.id}`)
       }
       //console.log(res)
     },
